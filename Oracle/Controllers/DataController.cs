@@ -115,6 +115,24 @@ namespace Oracle.Controllers
                 return Json(recipe, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [HttpGet]
+        public JsonResult favorite()
+        {
+            using (recipes = new recipeEntities())
+            {
+                List<int> recipesid = new List<int>();
+                int id;
+                if (Session["user"] is user)
+                {
+                    id = (Session["user"] as user).id;
+                    recipesid = recipes.recipe_for_user.Where(ru => ru.user_id == id).ToList().Select(ru => ru.recipe_id).ToList();
+                }
+                else
+                    id = 0;
+                return Json(recipesid, JsonRequestBehavior.AllowGet);
+            }
+        }
         // post request - add to db
         [HttpPost]
         public JsonResult addProduct(Product addProduct, NutritonalValue_for_product[] nutritionals)
@@ -175,6 +193,34 @@ namespace Oracle.Controllers
                     // Retrieve the error messages as a list of strings.
                 }
                 return Json(new { success = true, recipe = recipe.getSerialize() });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult favorite(int recipe) 
+        {
+            using (recipeEntities re = new recipeEntities())
+            {
+                try
+                {
+                    int id = (Session["user"] as user).id;
+                    if (id != null)
+                    {
+                        var ex = re.recipe_for_user.Where(r => r.user_id == id && r.recipe_id == recipe).FirstOrDefault();
+                        if (ex == null)
+                        {
+                            var ru = new recipe_for_user() { recipe_id = recipe, user_id = id };
+                            re.recipe_for_user.Add(ru);
+                            re.SaveChanges();
+                            return Json(new { id = ru.id, success = "success" });
+                        }
+                        return Json(new { id = ex.id, success = "false", reason = sentences.duplicateVote });
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                return Json("fail");
             }
         }
 
@@ -263,6 +309,16 @@ namespace Oracle.Controllers
             }
         }
 
+        [HttpDelete]
+        public JsonResult favorite(int recipe, bool allow = false)
+        {
+            using (recipes = new recipeEntities()) {
+                recipe_for_user ur = recipes.recipe_for_user.FirstOrDefault(u => u.id == recipe);
+                recipes.recipe_for_user.Remove(ur);
+                recipes.SaveChanges();
+                return Json("success", JsonRequestBehavior.AllowGet);
+            }
+        }
 
         public JsonResult user(int id)
         {
@@ -293,5 +349,7 @@ namespace Oracle.Controllers
                 throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
         }
 
+
+        public object recipesid { get; set; }
     }
 }

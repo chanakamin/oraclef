@@ -65,28 +65,33 @@ namespace Oracle.Controllers
         }
         [HttpPost]
         public JsonResult existUser(string name, string password,string email) {
-            bool can = true;
-            user user = null;
-            string reason = "This User doen't exists";            
-            var c = re.users.Where(u => u.name == name && u.password == password).Count();
-            if (c != 0) {
-                can = false;
-                reason = "This user already exist";
-                user = re.users.Where(u => u.name == name && u.password == password).First();
-                Session["user"] = user;
-            }
-            else if(email != null)
+            using (recipeEntities re = new recipeEntities())
             {
-                c = re.users.Where(u => u.email == email).Count();
-                if (c != 0) {
+                bool can = true;
+                user user = null;
+                string reason = "This User doen't exists";
+                var c = re.users.Where(u => u.name == name && u.password == password).Count();
+                if (c != 0)
+                {
                     can = false;
-                    reason = "This email address already exists";
+                    reason = "This user already exist";
+                    user = re.users.Where(u => u.name == name && u.password == password).First();
+                    Session["user"] = user;
                 }
+                else if (email != null)
+                {
+                    c = re.users.Where(u => u.email == email).Count();
+                    if (c != 0)
+                    {
+                        can = false;
+                        reason = "This email address already exists";
+                    }
+                }
+                if (user != null)
+                    user = user.getSerialize();
+                var ob = new { can = can, reason = reason, exist = !can, user = user };
+                return Json(ob, JsonRequestBehavior.AllowGet);
             }
-            if (user != null)
-                user = user.getSerialize();
-            var ob = new { can = can, reason = reason, exist = !can, user = user};
-            return Json(ob, JsonRequestBehavior.AllowGet); 
         }
 
         [HttpPost]

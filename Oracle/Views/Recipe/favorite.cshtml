@@ -1,0 +1,11 @@
+﻿<ul>
+<li ng-repeat="recipe in recipes track by recipe.id">
+    <a href="#"  ng-click="recipe.show()" >
+        <label>{{recipe.name}}</label>
+        <p>{{recipe.description}}</p>
+    </a>
+</li>
+</ul>
+<p ng-show="recipes.length == 0">
+    {{messages.nofavorite}}
+</p>     

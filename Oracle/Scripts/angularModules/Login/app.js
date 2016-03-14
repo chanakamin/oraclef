@@ -18,7 +18,7 @@ app.config(function( $locationProvider,$routeProvider)
 });
 app.run(function ($location, $rootScope, $http, $rootScope) {
     $http.get('Login/user').then(function (data) {
-        var d = data.data; debugger;
+        var d = data.data; 
         if (d.status == 1)
         {
             if (d.user.user_or_manager) {

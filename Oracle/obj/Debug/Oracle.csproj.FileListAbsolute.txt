@@ -22,3 +22,4 @@ J:\orgit\Oracle\Oracle\bin\System.Web.WebPages.Deployment.xml
 J:\orgit\Oracle\Oracle\bin\System.Web.WebPages.Razor.xml
 J:\orgit\Oracle\Oracle\obj\Debug\Oracle.dll
 J:\orgit\Oracle\Oracle\obj\Debug\Oracle.pdb
+J:\orgit\Oracle\Oracle\obj\Debug\Oracle.csprojResolveAssemblyReference.cache

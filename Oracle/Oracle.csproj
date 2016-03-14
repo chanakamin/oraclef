@@ -371,7 +371,9 @@
     <Content Include="Scripts\plugin\own.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Recipe\Partials\newRecipe.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -410,6 +412,7 @@
     <Content Include="Views\Recipe\Welcome.cshtml" />
     <Content Include="Views\Recipe\_LayoutRecipe.cshtml" />
     <Content Include="Views\Shared\Welcome.cshtml" />
+    <Content Include="Views\Recipe\favorite.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

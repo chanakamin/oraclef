@@ -1,6 +1,11 @@
 ﻿@{
     Layout = "_LoginLayout.cshtml";  
  }
+<style>
+    .mm-listview a.mm-next {
+        width: 100%;
+    }
+</style>
 
 <div id="login" @*ng-controller="loginCtrl"*@>
  <div class="col xs-12 hidden-xs col-sm-3 " >
@@ -25,9 +30,19 @@
      </noscript>
         </div>
 <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6" >
-     <div ng-view="">
+     @*<div ng-view="">
 
-     </div>
+     </div>*@
+    <div class="col-xs-12 col-sm-" ng-if="!guestPart">
+    <h1 class="large">Welcome.</h1>
+    <h6>We are glad to see you here.</h6>
+    <p>
+        Over here you can easily write and manipulate any recipe you want!
+        Just click Enter and Sign up.
+        You will be able to view your recipe's nutriritional value near your recipe, and upload it for others to             enjoy or just save it for yourself to use anytime.
+        If you just want to explore and enjoy ready made recipes that our community uploaded, all you have to do is          click on Guest.
+    </p>
+</div>
 </div>
 
  <nav id="welcomeMenu" class="col-xs-12 col-sm-5">
@@ -50,16 +65,10 @@
                 <li><a href="#" ng-click="link('guest')"><span class="glyphicon glyphicon-user"></span>{{words.guest}}</a>
                     <ul>
                         <li>
-                            <div>
-                                <div class="row">
-                                    <h3>{{operation}}</h3>
-                                    <p>{{message}}</p>
-                                </div>
-                                <div class="row">
-                                    <button ng-click="link('/')">{{words.cancel}}</button>
-                                    <button ng-click="guest()">{{words.guest}}</button>
-                                </div>
-                            </div>
+                            <h3>{{guest.operation}}</h3>
+                            <p>{{guest.message}}</p>
+                            <a href="#mm-1">{{words.cancel}}</a>
+                            <button ng-click="guest()">{{words.guest}}</button>
                         </li>
                     </ul>   
                 </li>

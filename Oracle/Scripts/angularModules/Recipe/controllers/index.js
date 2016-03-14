@@ -32,6 +32,7 @@
             'new': 'New Recipe',
             approve: 'Approve',
             search: 'Search',
+            favorite: 'Favorite',
         };
     }
     angular.module("controllers").controller("indexCtrl", ['$scope', '$location', '$rootScope', 'resourcesFactory','userFactory', ctrl]);

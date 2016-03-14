@@ -9,11 +9,13 @@ namespace Oracle.Models
     {
         public static string notAllowedData { get; set; }
         public static string notAllowedPage { get; set; }
+        public static string duplicateVote { get; set; }
 
         static sentences()
         {
             notAllowedData = "You aren't allowed to get that data";
             notAllowedPage = "You are";
+            duplicateVote = "You already choose this recipe";
         }
     }
 }

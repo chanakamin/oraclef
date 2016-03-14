@@ -104,5 +104,9 @@ namespace Oracle.Controllers
         {
             return PartialView();
         }
+        public ActionResult favorite() 
+        {
+            return PartialView();
+        }
     }
 }

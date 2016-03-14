@@ -23,4 +23,17 @@
         return ddo;
     };
     angular.module('directives').directive('calculator', dircalc);
+
+    var dircalc = function () {
+        var ddo = {
+            restrict: 'E',
+            scope: {
+                products: '=',
+            },
+            templateUrl: 'Recipe/favorite',
+            controller: 'favoriteCtrl',
+        }
+        return ddo;
+    };
+    angular.module('directives').directive('favorites', dircalc);
 })();

@@ -17,7 +17,10 @@ namespace Oracle.Models
         {
             get
             {
-                return re.equipment_in_recipe.Where(eq => eq.recipe_id == this.id).Select(eq => eq.special_equipment).ToList();
+                using (recipeEntities re = new recipeEntities())
+                {
+                    return re.equipment_in_recipe.Where(eq => eq.recipe_id == this.id).Select(eq => eq.special_equipment).ToList();
+                }
             }
         }
         // list of products
@@ -25,9 +28,19 @@ namespace Oracle.Models
         {
             get
             {
-                return re.products_in_recipe.Where(pr => pr.recipe_id == this.id).ToList().Select(pr=>pr.getSerialize()).ToList();
+                using (recipeEntities re = new recipeEntities())
+                {
+                    return re.products_in_recipe.Where(pr => pr.recipe_id == this.id).ToList().Select(pr => pr.getSerialize()).ToList();
+                }
             }
         }
+
+        public int favorites { get {
+            using (re = new recipeEntities())
+            {
+                return re.recipe_for_user.Where(ru => ru.recipe_id == this.id).ToList().Count();
+            }
+        } }
         // set if recipe approved
         public bool isApproved() 
         {
@@ -39,19 +52,23 @@ namespace Oracle.Models
         // return recipe for serialize
         public recipe getSerialize()
         {
-            recipe r = new recipe() {
-                id = this.id,
-                name = this.name,
-                portions = this.portions,
-                tips = this.tips,
-                approved = this.approved,
-                instructions = this.instructions,
-                preparation = this.preparation,
-                description = this.description,
-                category1 = re.categories.FirstOrDefault(c=>c.id==this.category).getSerialize(),
-                category = this.category
-            };
-            return r;
+            using (recipeEntities re = new recipeEntities())
+            {
+                recipe r = new recipe()
+                {
+                    id = this.id,
+                    name = this.name,
+                    portions = this.portions,
+                    tips = this.tips,
+                    approved = this.approved,
+                    instructions = this.instructions,
+                    preparation = this.preparation,
+                    description = this.description,
+                    category1 = re.categories.FirstOrDefault(c => c.id == this.category).getSerialize(),
+                    category = this.category
+                };
+                return r;
+            }
         }
        
     }

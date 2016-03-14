@@ -1,10 +1,11 @@
 ﻿(function () {
     function ctrl($scope, $locatoin,$timeout,$http, userFactory) {
         function direct(part) {
+            $scope.manager = false;
             window.location.href = '/'+part;
         }
         $scope.direct = direct;
-        function init(oper,message) {
+        function init(oper, message) {
             $scope.user = {};
             $scope.oper = true;
             $scope.operation = messages.getMessage(oper).context;
@@ -77,6 +78,7 @@
             user: 'User',
             manager: 'Manager',
         };
+        $scope.sign = {};
         $scope.user = userFactory.getUser();
         $scope.signup = function () {
             user = $scope.user;
@@ -85,8 +87,8 @@
                     if (success == true)
                         direct('Recipe');
                     else {
-                        $scope.oper = false;
-                        $scope.message = success;
+
+                        $scope.sign.message = [success];
                     }
                 });
         };
@@ -97,22 +99,24 @@
                     if (success == true)
                         direct('Recipe');
                     else {
-                        $scope.oper = false;
-                        $scope.error = true;
                         if (success == 'manager') {
                             $scope.message = messages.getMessage('manager');
                             $scope.error = false;
                         } else {
-                            $scope.message = success;
+                            $scope.manager = true;
+                            $scope.sign.message = [success];
                         }
                     }
             });
         }
+        $scope.signin = { operation: messages.getMessage('logoper').context };
         $scope.guest = function () {
             $http.post('Login/guest').then(function () {
                 direct('Recipe');
             });            
         }
+        $scope.guest.operation = messages.getMessage('useroperation').context;
+        $scope.guest.message = messages.getMessage('guestopt').context;
         $scope.$on('manager_login', function () {
             $locatoin.path('signin');
             $scope.oper = false;

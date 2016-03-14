@@ -56,5 +56,10 @@
             recipes.shown = recipes.search;
         });
     }
-    angular.module('controllers').controller('recipesListCtrl', ['$scope','$location','RecipesFactory', ctrl]);
+    angular.module('controllers').controller('recipesListCtrl', ['$scope', '$location', 'RecipesFactory', ctrl]);
+
+    function ctrl2($scope, RecipesFactory, userFactory) {
+
+    }
+    angular.module('controllers').controller('favoriteCtrl',['$scope','RecipesFactory','userFactory',ctrl2])
 })();
