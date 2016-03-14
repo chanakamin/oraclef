@@ -1,0 +1,7 @@
+﻿<form ng-submit="searchRecipe">
+    <h2>Select properties of recipe to see:</h2>
+    <label>recipes contains specific ingrediant:</label><textarea ng-model="search.ingrediant.in"></textarea>  <br />
+    <label>Recipes doesn't contains specific ingrediants</label><textarea ng-model="search.ingrediand.not"></textarea><br />
+    <label>Recipes with calories between: </label><input type="number" ng-model="search.calory.min" />to <input type="number" ng-model="search.calory.max" />
+
+</form>

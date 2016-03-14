@@ -1,0 +1,28 @@
+﻿<div class="col-xs-12">
+    <form ng-if="oper" name="login" ng-model="login" ng-submit="Login()">
+        <div class="row">
+            <h3>{{operation}} </h3>
+            <p>{{message}}</p>
+        </div>
+        <div class="row">
+    `       <input type="text" ng-model="user.name" name="name" placeholder="Name" required="required"/>
+        </div>
+        <div class="row">
+            <input type="password" name="password" ng-model="user.password" placeholder="password" required="required" />
+        </div>
+    	<button type="submit">{{words.login}}</button>
+    	<button type="button" ng-click="link('/')">{{words.cancel}}</button>
+    	<button type="button" ng-click="link('signup')">{{words.signin}}</button>
+    </form>
+    <div ng-if="!oper">
+    	<h2>{{massege}}</h2>
+    	<div ng-if="error">
+       	 	<button type="button" ng-click="link('/')">{{words.cancel}}</button>
+        	<button type="button" ng-click="link('signin')">{{words.signin}}</button>
+    	</div>
+    	<div ng-if="!error">
+        	<button type="button" ng-click="direct('Recipe')">{{words.user}}</button>
+        	<button type="button" ng-click="direct('Manager')">{{words.manager}}</button>
+    	</div>
+    </div>
+</div>

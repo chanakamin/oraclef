@@ -1,0 +1,47 @@
+﻿<form ng-submit="search()">
+    <h3>Find recipe by:</h3>
+    <div  class="input-group-sm">
+        <h4>By Calories: </h4>
+        <span>Calories between:</span>
+        <input type="number" ng-model="cal.min" value="0" min="0" />
+        <span>To</span>
+        <input type="number" ng-model="cal.max" value="0" min="0" />
+    </div>
+    <div>
+        <h4>By products:</h4>
+        <section  class="input-group-sm">
+            <h6>Recipe does <strong>not</strong> contains those products:</h6>
+            <ul>
+                <li ng-repeat="npr in prod.not track by npr.id">
+                    <span>{{npr.name}}</span>
+                    <button type="button" ng-click="prod.remove(npr.id,0)">-</button>
+                </li>
+            </ul>
+            <select id="Select Product" class="form-control" ng-model="prod.nprod" default-option="Select Product" ng-options="pr.id as pr.name for pr in prod.remain track by pr.id" ></select>
+            <button type="button" ng-click="prod.add(prod.nprod,0)">+</button>
+        </section>        
+        <section  class="input-group-sm">
+            <h6>Recipe does <strong>contains</strong>  these products:</h6>
+            <ul>
+                <li ng-repeat="npr in prod.con ">
+                    <span>{{npr.name}}</span>
+                    <button type="button" ng-click="prod.remove(npr.id,1)">-</button>
+                </li>
+            </ul>
+            <select id="Select Product" class="form-control" ng-model="prod.conprod" default-option="Select Product" ng-options="pr.id as pr.name for pr in prod.remain" ></select>
+            <button type="button" ng-click="prod.add(prod.conprod,1)">+</button>
+        </section>
+        <section class="input-group-sm">
+            <h6>Recipe from these categories:</h6>
+            <ul>
+                <li ng-repeat="cat in categories.include track by cat.id">
+                    <span>{{cat.name}}</span>
+                    <button type="button" ng-click="categories.remove(cat)">-</button>
+                </li>
+            </ul>
+            <select id="Select_category" class="form-control" ng-model="cat" default-option="Select Category" ng-options="category as category.name for category in categories.declude track by category.id" ></select>
+            <button type="button" ng-click="categories.add()">+</button>
+        </section>
+    </div>    
+    <button type="submit">Search</button>
+</form>

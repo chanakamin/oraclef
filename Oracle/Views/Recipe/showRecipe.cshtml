@@ -1,0 +1,57 @@
+﻿        <!--a place for tips-->
+        <div class="col-xs-2" >
+            <div class="well">
+               <p> 
+                  Nutritional values
+               </p>
+            </div>
+            <nutritional-values products="recipe.products"></nutritional-values>
+        </div>
+
+        <!--a place for text-->
+<div class="col-xs-7">
+    <div class="recipe-details recipe">
+        <div>
+            <h2>{{recipe.name}}</h2>
+        </div>
+        <div>
+            <h4>{{recipe.description}}</h4>
+        </div>
+        <div>
+            <h6>Portions: {{recipe.portions}}</h6>
+        </div>
+        <div>
+            <h6>Preparation: {{recipe.preparation}}</h6>
+        </div>
+    </div>
+    <div class="recipe-instructions recipe">
+        <h5>Instructions:</h5>
+        <p>{{recipe.instructions}}</p>
+    </div>
+    <div class="recipe-ingredients recipe">
+        <h5>Ingredients</h5>
+        <div ng-repeat="p in recipe.products track by p.id">
+            <label>{{p.amount}}</label>
+            <label>{{p.measurement.name}}</label>
+            <label>{{p.product.name}}</label>
+        </div>
+    </div>
+     <div class="recipe-equipments recipe">
+         <h6>Special Equipments</h6>
+         <span ng-repeat="eq in recipe.equipments">
+             {{eq}} <span ng-if="!$last">, </span>
+         </span>
+     </div>    
+    <div class="well">
+        <p> 
+            {{recipe.tips}} 
+        </p>
+    </div>
+</div>
+<!--this is a disapearing menu (how to do? toggle?--check.)-->
+<div class="col-xs-3" >
+    <calculator products="recipe.products"></calculator>
+</div>
+
+
+ 

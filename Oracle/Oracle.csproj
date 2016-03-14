@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79E4F1A2-A688-4FB9-9C83-6B3BBA273C69}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oracle</RootNamespace>
+    <AssemblyName>Oracle</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\RecipeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\application\NutritonalValue_for_product.cs" />
+    <Compile Include="Models\application\Produ.cs" />
+    <Compile Include="Models\application\Product.cs" />
+    <Compile Include="Models\application\Recipe.cs" />
+    <Compile Include="Models\category.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\equipment_in_recipe.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\measurement.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\measurement_with_type.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\measure_type.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\nutritional_value.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\nutritional_value_details.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\partialModelClasses\category.cs" />
+    <Compile Include="Models\partialModelClasses\measurements.cs" />
+    <Compile Include="Models\partialModelClasses\measure_type.cs" />
+    <Compile Include="Models\partialModelClasses\nutritional_value.cs" />
+    <Compile Include="Models\partialModelClasses\product.cs" />
+    <Compile Include="Models\partialModelClasses\products_in_recipe.cs" />
+    <Compile Include="Models\partialModelClasses\product_in_nutritional_value.cs" />
+    <Compile Include="Models\partialModelClasses\recipe.cs" />
+    <Compile Include="Models\partialModelClasses\user.cs" />
+    <Compile Include="Models\product.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\products_in_nutritional_value.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\products_in_recipe.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Recipe.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Recipe.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\recipe.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Recipe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Recipe.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Recipe1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\recipe_for_user.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sentences.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>Recipe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\aspnet-Oracle-תשעוא%27ח171330.mdf" />
+    <Content Include="App_Data\aspnet-Oracle-תשעוא%27ח171330_log.ldf">
+      <DependentUpon>aspnet-Oracle-תשעוא%27ח171330.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\recipe.mdf" />
+    <Content Include="App_Data\recipe_log.ldf">
+      <DependentUpon>recipe.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\jquery.mmenu.all.css" />
+    <Content Include="Content\bootstrap\jquery.mmenu.positioning.css" />
+    <Content Include="Content\bootstrap\jquery.mmenu.themes.css" />
+    <Content Include="Content\bootstrap\_bootstrap-theme.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\myStyle.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\angularModules\.idea\encodings.xml" />
+    <Content Include="Scripts\angularModules\.idea\misc.xml" />
+    <Content Include="Scripts\angularModules\.idea\modules.xml" />
+    <Content Include="Scripts\angularModules\.idea\scopes\scope_settings.xml" />
+    <Content Include="Scripts\angularModules\.idea\vcs.xml" />
+    <Content Include="Scripts\angularModules\.idea\workspace.xml" />
+    <Content Include="Scripts\angularModules\Login\app.js" />
+    <Content Include="Scripts\angularModules\Login\index.js" />
+    <Content Include="Scripts\angularModules\Login\user.js" />
+    <Content Include="Scripts\angularModules\Manager\approve.js" />
+    <Content Include="Scripts\angularModules\Manager\editCtrl.js" />
+    <Content Include="Scripts\angularModules\Manager\editDirective.js" />
+    <Content Include="Scripts\angularModules\Manager\manager.js" />
+    <Content Include="Scripts\angularModules\Manager\_managerFact.js" />
+    <Content Include="Scripts\angularModules\Recipe\app.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\1ctrlModule.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\addProduct.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\calculator.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\index.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\login.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\newRecipeCtrl.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\nutritionalsRecipe.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\productRecipe.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\reciesList.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\search.js" />
+    <Content Include="Scripts\angularModules\Recipe\controllers\showRecipe.js" />
+    <Content Include="Scripts\angularModules\Recipe\directives\directModule.js" />
+    <Content Include="Scripts\angularModules\Recipe\directives\nutritionalValues.js" />
+    <Content Include="Scripts\angularModules\Recipe\directives\productDirective.js" />
+    <Content Include="Scripts\angularModules\Recipe\directives\productRecipe.js" />
+    <Content Include="Scripts\angularModules\Recipe\directives\search.js" />
+    <Content Include="Scripts\angularModules\Recipe\directives\selectDirective.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\1mainFactory.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\1user.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\constant.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\convertion.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\detailsFactory.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\productFactory.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\recipeFactory.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\resourcesFactory.js" />
+    <Content Include="Scripts\angularModules\Recipe\factories\uiFactory.js" />
+    <Content Include="Scripts\angularModules\Recipe\filters\1filterModule.js" />
+    <Content Include="Scripts\angularModules\Recipe\filters\convert.js" />
+    <Content Include="Scripts\angularSrc\angular-animate.js" />
+    <Content Include="Scripts\angularSrc\angular-animate.min.js" />
+    <Content Include="Scripts\angularSrc\angular-route.js" />
+    <Content Include="Scripts\angularSrc\angular-route.min.js" />
+    <Content Include="Scripts\angularSrc\angular.js" />
+    <Content Include="Scripts\angularSrc\angular.min.js" />
+    <Content Include="Scripts\jqueryui\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jqueryui\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jqueryval\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jqueryval\jquery.unobtrusive-ajax.min.js" />
+    <EntityDeploy Include="Models\Recipe.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Recipe.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Recipe.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Recipe.edmx</DependentUpon>
+      <LastGenOutput>Recipe.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Recipe.edmx.diagram">
+      <DependentUpon>Recipe.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Recipe.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Recipe.edmx</DependentUpon>
+      <LastGenOutput>Recipe1.cs</LastGenOutput>
+    </Content>
+    <None Include="Scripts\jqueryval\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jqueryval\jquery.validate.js" />
+    <Content Include="Scripts\jqueryval\jquery.validate.min.js" />
+    <Content Include="Scripts\jqueryval\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jqueryval\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery\ajquery-1.11.3.min.js" />
+    <Content Include="Scripts\jquery\bootstrap.js" />
+    <Content Include="Scripts\jquery\code.js" />
+    <Content Include="Scripts\jquery\jquery.mmenu.all.min.js" />
+    <Content Include="Scripts\knockout\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout\knockout-2.2.0.js" />
+    <Content Include="Scripts\modernizr\modernizr-2.6.2.js" />
+    <Content Include="Scripts\plugin\inflection.js" />
+    <Content Include="Scripts\plugin\own.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Recipe\Partials\newRecipe.html" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\SignIn.cshtml" />
+    <Content Include="Views\Login\Signup.cshtml" />
+    <Content Include="Views\Login\Welcome.cshtml" />
+    <Content Include="Views\Login\_LoginLayout.cshtml" />
+    <Content Include="Views\Manager\approved.cshtml" />
+    <Content Include="Views\Manager\edit.cshtml" />
+    <Content Include="Views\Manager\editProduct.cshtml" />
+    <Content Include="Views\Manager\editRecipe.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\Welcome.cshtml" />
+    <Content Include="Views\Recipe\addProduct.cshtml" />
+    <Content Include="Views\Recipe\addRecipeForProduct.cshtml" />
+    <Content Include="Views\Recipe\allRecipes.cshtml" />
+    <Content Include="Views\Recipe\calculator.cshtml" />
+    <Content Include="Views\Recipe\createRecipe.cshtml" />
+    <Content Include="Views\Recipe\find.cshtml" />
+    <Content Include="Views\Recipe\forbidden.cshtml" />
+    <Content Include="Views\Recipe\Index.cshtml" />
+    <Content Include="Views\Recipe\newRecipe.cshtml" />
+    <Content Include="Views\Recipe\nutritionalValues.cshtml" />
+    <Content Include="Views\Recipe\search.cshtml" />
+    <Content Include="Views\Recipe\showProduct.cshtml" />
+    <Content Include="Views\Recipe\showRecipe.cshtml" />
+    <Content Include="Views\Recipe\Welcome.cshtml" />
+    <Content Include="Views\Recipe\_LayoutRecipe.cshtml" />
+    <Content Include="Views\Shared\Welcome.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\angularModules\.idea\.name" />
+    <Content Include="Scripts\angularModules\.idea\angularModules.iml" />
+    <Content Include="Scripts\angularModules\.idea\_name" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49408/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

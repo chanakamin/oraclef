@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html  ng-app="LoginApp" ng-controller="loginCtrl">
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/bootstrap/_bootstrap-theme.css" rel="stylesheet" />  
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/jquery.mmenu.all.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/jquery.mmenu.positioning.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/jquery.mmenu.themes.css" rel="stylesheet" />
+    <link href="~/Content/myStyle.css" rel="stylesheet" />
+    @*@Styles.Render("~/Content/css")*@    
+    <base href="/" />
+    <style>
+        body { 
+            background:url('Content/themes/images/tachush13.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body id="login">
+    <div>
+        <div id="container" class="container-fluid">
+            @RenderBody()
+            <div class="row">
+                <!--the bottom bar-->
+                <div class="col-xs-12">
+                    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-toggle collapsed" data-toggle="collapse" data-target="#welcomeNavbar" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="glyphicon glyphicon-cutlery"></span>
+                                </a>
+                                <p class="navbar-brand"><span class="glyphicon glyphicon-home"></span></p>
+							</div>
+                            <div class="collapse navbar-collapse" id="welcomeNavbar">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#welcomeMenu" ><span class="glyphicon glyphicon-play" aria-hidden="true"></span>{{words.enter}}</a></li>
+                                    
+                                    <li><a href="#" ng-click="link('logout')">{{words.logout}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    
+    <script src="~/Scripts/jquery/ajquery-1.11.3.min.js"></script>   
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/angularsrc")
+    @Scripts.Render("~/bundles/angularLogin")
+    @RenderSection("scripts", required: false) 
+    <script src="~/Scripts/jquery/bootstrap.js"></script>
+    <script src="~/Scripts/jquery/jquery.mmenu.all.min.js"></script>
+    <script src="~/Scripts/jquery/code.js"></script>
+</body>
+</html>

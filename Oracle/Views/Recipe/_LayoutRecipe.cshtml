@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/angularsrc")
+    <script src="~/Scripts/angularScripts/app.js"></script>
+    @Scripts.Render("~/bundles/ctrl")
+</head>
+<body id="recipe">
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

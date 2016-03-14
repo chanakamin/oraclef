@@ -1,0 +1,92 @@
+﻿@model Oracle.Models.recipe
+
+@{
+    ViewBag.Title = "createRecipe";
+}
+
+<h2>createRecipe</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>recipe</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user_id)
+            @Html.ValidationMessageFor(model => model.user_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.preparation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.preparation)
+            @Html.ValidationMessageFor(model => model.preparation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.time)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.time)
+            @Html.ValidationMessageFor(model => model.time)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.portions)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.portions)
+            @Html.ValidationMessageFor(model => model.portions)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.tips)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.tips)
+            @Html.ValidationMessageFor(model => model.tips)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.comments)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.comments)
+            @Html.ValidationMessageFor(model => model.comments)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.approved)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.approved)
+            @Html.ValidationMessageFor(model => model.approved)
+        </div>
+        
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,63 @@
+﻿<!--a place for tips-->
+<div class="col-xs-2" >
+    <div class="well">               
+    </div>
+</div>
+
+<!--a place for text-->
+<div class="col-xs-7">
+    <form class="form-group" name="editrecipe" id="recipe" ng-submit="save()">
+        <div class="input-group-lg">
+            <label for="Recipe Name" class="sr-only">Recipe Name</label>
+            <input id="Recipe Name" type="text" name="title" ng-model="recipe.name" required="required" class="form-control" placeholder="Recipe Name" aria-labelledby="Recipe Name" />
+        </div>
+        <div class="input-group-sm">
+            <label for="Description" class="sr-only">Description</label>
+            <input id="Description" type="text" name="description" ng-model="recipe.description" class="form-control" placeholder="{{ texts.recipe.description }}" aria-labelledby="Description" />
+        </div>
+        <div class="input-group">
+            <label for="Preperation Time" class="sr-only">Preperation Time</label>
+            <input id="Preperation Time" type="text" class="form-control" name="preparation" ng-model="recipe.preparation" placeholder="{{ texts.recipe.preparation }}" aria-labelledby="Preperation Time" />
+        </div>
+        <div class="input-group">
+            <label for="Servings" class="sr-only">Servings</label>
+            <input id="Servings" type="number" class="form-control" name="portions" placeholder="{{ texts.recipe.portions }}" ng-model="recipe.portions" aria-labelledby="Servings" />
+        </div>
+        <label for="Ingredients" class=" sr-only">Ingredients</label>
+        <div id="Ingredients" aria-labelledby="Ingredients">            
+            <div ng-repeat="product in recipe.products ">
+                <exproduct-recipe product="product" products="recipe.products"></exproduct-recipe>
+            </div>
+            <addproduct-recipe recipe-products="recipe.products"></addproduct-recipe>
+        </div>
+        <div class="input-group">
+            <label for="Instructions" class="sr-only">Instructions</label>
+            <textarea id="Instructions" class="form-control" name="instructions" ng-model="recipe.instructions" placeholder="{{ texts.recipe.instructions }}" aria-labelledby="Instructions"></textarea>
+        </div>
+        <div class="input-group">
+            <div ng-repeat="special in recipe.equipments | filter:nonEmpty ">
+                <input type="text" name="{{ 'special_' + $index }}" ng-model="special.equipment" class="form-control" aria-labelledby="Special Equipment" style="width:75%"/>                
+            </div>
+            <label for="AddSE" class="sr-only">Add Special Equipment</label>
+            <div id="AddSE" aria-labelledby="Add Special Equipment">
+                <input type="text" id="Special Equipment" ng-model="newEquipment" class="form-control" placeholder="Special Equipment" aria-labelledby="Special Equipment" style="width:75%"/>
+                <button type="button" class="btn btn-default col-xs-3" ng-click="addEquipment()">
+                    <span class=" glyphicon glyphicon-plus"></span>
+                </button>
+            </div>          
+        </div>
+        <div class="input-group">
+            <label for="Tips" class="sr-only">Tips</label>
+            <textarea id="Tips" class="form-control" style="width:500px; height:200px" name="tips" ng-model="recipe.tips" placeholder="Tips" aria-labelledby="Tips"></textarea>
+        </div>
+        <p>
+            <input type="submit" class="btn btn-default" value="Save" />
+        </p>
+    </form>
+    
+</div>
+        
+<!--this is a disapearing menu (how to do? toggle?--check.)-->
+<div class="col-xs-3" class="Pullout" style="background:black; color:orangered; height:1000px; padding:50px 0px 2px 4px">
+    <div new-product="" ng-show="showProduct" show="showProduct"></div>
+</div>

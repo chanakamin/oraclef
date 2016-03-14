@@ -1,0 +1,25 @@
+﻿<div class="col-xs-12">
+    <form ng-if="oper" name="newUser" ng-model="newUser" ng-submit="signup()">
+        <div class="row">
+            <h1>{{operation}}</h1>
+            <p>{{message}}</p>
+        </div>
+        <div class="row" >
+            <input autocomplete="off" type="text" ng-model="user.name" placeholder="name" name="name" required="required"/>
+        </div>
+        <div class="row">
+            <input autocomplete="off" type="password" ng-model="user.password" placeholder="password" name="password" required="required"/>
+        </div>
+        <div class="row">
+            <input autocomplete="off" type="email" ng-model="user.email" placeholder="Email" name="email"/>
+        </div>
+        <button type="submit">{{words.ok}}</button>
+        <button type="button" ng-click="link('/')">{{words.cancel}}</button>
+        <div class="row Error"></div>
+    </form>
+    <section ng-if="!oper">
+        <h2>{{message}}</h2>
+        <button ng-click="link('/')">{{words.cancel}}</button>
+        <button ng-click="link('signup')" type="button">{{words.signup}}</button>
+    </section>
+</div>

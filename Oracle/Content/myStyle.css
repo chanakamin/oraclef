@@ -1,0 +1,62 @@
+﻿body #recipes {
+   
+}
+
+#colSubject .btn{
+    width:100%;
+    color:#ff6a00;
+    background-color:rgba(255,255,255,0.5);
+}
+#colSubject .btn:hover{
+    background-color:rgba(255,255,255,0.6);
+}
+
+#colSubject h2{
+    color:black;
+    font-weight:300;
+    font-size:2em;
+}
+
+#colRecipes{
+    color:white;      
+}
+
+#colRecipes h2{
+    color:#ff6a00;
+    font-size:2em;
+    font-weight:300;
+}
+
+#colRecipes p{
+    font-weight:300;
+}
+
+#colRecipes .btn{
+    background-color:rgba(0,0,0,0.5);
+    width:100%;
+  
+}
+
+#colRecipes .btn:hover{
+    background-color:rgba(0,0,0,0.6)
+}
+
+#newRecipeForm {
+    background-color:rgba(0,0,0,0.6)
+}
+
+#newRecipeForm #title{
+    background-color:rgba(0,0,0,0.6);
+    padding:5px, 10px;
+}
+
+form.ng-submitted input.ng-invalid,  input.ng-invalid.ng-dirty {
+            border: solid 1px red;
+            outline: none;
+        }
+
+        /*input.ng-invalid.ng-dirty {
+            border: solid 1px red;
+            outline: none;
+        }*/
+

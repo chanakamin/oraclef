@@ -1,0 +1,17 @@
+﻿<div class="col-xs-12 col-sm-" ng-if="!guestPart">
+    <h1 class="large">Welcome.</h1>
+    <h6>We are glad to see you here.</h6>
+    <p>
+        Over here you can easily write and manipulate any recipe you want!
+        Just click Enter and Sign up.
+        You will be able to view your recipe's nutriritional value near your recipe, and upload it for others to enjoy or just save it for yourself to use anytime.
+        If you just want to explore and enjoy ready made recipes that our community uploaded, all you have to do is click on Guest.
+    </p>
+</div>
+
+<div ng-if="guestPart">
+    <h3>{{operation}}</h3>
+    <p>{{message}}</p>
+    <button ng-click="link('/')">{{words.cancel}}</button>
+    <button ng-click="guest()">{{words.guest}}</button>
+</div>

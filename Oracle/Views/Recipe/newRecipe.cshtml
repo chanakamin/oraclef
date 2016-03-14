@@ -1,0 +1,84 @@
+﻿@model Oracle.Models.recipe
+<div id="newRecipe">
+    <div class="row" id="main" >
+        <div id="tips" class="hidden-xs hidden-sm hidden-md col-lg-1">
+            <well>
+                <h2>Fill in the information the best you can.</h2>
+                <p>The more information you enter the better chance you have for your recipe to be accepted.</p>
+            </well>
+        </div>
+        <div id="newRecipeForm" class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+            <form class="form-group" name="addRecipe" id="addRecipe" ng-submit="SubmitRecipe()">
+                <div id="title" class="row">
+                    <div class="row">
+                        <div class="input-group-lg col-xs-12">
+                            <label class="sr-only" for="Recipe Name">Recipe Name</label>
+                            <input id="Recipe Name" aria-labelledby="Recipe Name" class="form-control" ng-model="recipe.name" placeholder="Recipe Name" required="required" type="text" />
+                        </div>
+                        <div class="input-group-sm col-xs-12">
+                            <label class="sr-only" for="Description">Description</label>
+                            <input id="Description" aria-labelledby="Description" class="form-control" ng-model="recipe.description" placeholder="{{ texts.recipe.description }}" type="text" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                            <div class="input-group-sm">
+                                <label class="sr-only" for="Preperation Time">Preperation Time</label>
+                                <input id="Preperation Time" aria-labelledby="Preperation Time" class="form-control" ng-model="recipe.preparation" placeholder="{{ texts.recipe.preparation }}" type="text" />
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                            <div class="input-group-sm ">
+                                <label class="sr-only" for="Servings">Servings</label>
+                                <input id="Servings" aria-labelledby="Servings" class="form-control" ng-model="recipe.portions" placeholder="{{ texts.recipe.portions }}" type="number" />
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                            <div class="input-group-sm">
+                                <label class="sr-only" for="Preperation Time">Category</label>
+                                <select id="Category" class="form-control" ng-model="recipe.category1" default-option="Select Category" ng-options="category as category.name for category in categories track by category.id" aria-labelledby="Category" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="recipeBody" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7" id="ingredientList">
+                            <label for="Tips" class="sr-only">Tips</label>
+                            <textarea id="Tips" class="form-control" name="tips" ng-model="recipe.tips" placeholder="Tips" aria-labelledby="Tips" rows="5"></textarea>
+                            <div class="row" id="ingredient" ng-repeat="product in recipe.products ">
+                                <exproduct-recipe product="product" products="recipe.products"></exproduct-recipe>
+                            </div>
+                            <div class="row" id="addIngredient">
+                                <addproduct-recipe recipe-products="recipe.products"></addproduct-recipe>
+                             </div>
+                        </div>
+                    <div id="instructions" class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                        <div class="input-group col-xs-12">
+                            <label class="sr-only" for="Instructions">Instructions</label>
+                            <!--chana can you make the number of rows = to #recipeBody's px /5  in angular?-->
+                            <textarea id="Instructions" aria-labelledby="Instructions" class="form-control" ng-model="recipe.instructions" placeholder="{{ texts.recipe.instructions }}" rows="20"></textarea>                                                        
+                        </div>
+                        <div class="input-group col-xs-12">
+                            <div class="input-group-sm col-xs-12" ng-repeat="special in recipe.equipments | filter:nonEmpty ">
+                                <input type="text" name="{{ 'special_' + $index }}" ng-model="special.equipment" class="form-control" aria-labelledby="Special Equipment"/>                
+                            </div>
+                            <label for="AddSE" class="sr-only">Add Special Equipment</label>
+                            <div id="AddSE" aria-labelledby="Add Special Equipment">
+                                <div class="input-group-sm col-xs-9">
+                                    <input type="text" id="Special Equipment" ng-model="newEquipment" class="form-control" placeholder="Special Equipment" aria-labelledby="Special Equipment"/>
+                                </div>
+                                <button type="button" class="btn btn-default col-xs-3" ng-click="addEquipment()">
+                                    <span class=" glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>          
+                        </div>    
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-3 Pullout">
+            <div new-product="" ng-show="showProduct" show="showProduct"></div>
+        </div>
+    </div>
+</div>       
+
