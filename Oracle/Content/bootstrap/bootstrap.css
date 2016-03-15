@@ -5831,12 +5831,12 @@ button.list-group-item-danger.active:focus {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  color:black;
-  background-color: rgba(245, 245, 245, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 4px;
+  color:white;
+  text-shadow:black;
+  border:none;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  background-image:none;
 }
 .well blockquote {
   border-color: #ddd;

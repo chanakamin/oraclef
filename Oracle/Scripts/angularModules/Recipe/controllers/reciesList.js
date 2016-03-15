@@ -1,6 +1,6 @@
 ﻿/// <reference path="../factories/recipeFactory.js" />
 (function () {
-    function ctrl($scope, $location, RecipesFactory) {
+    function ctrl($scope, $location, $route, RecipesFactory) {
         function Recipe(r) {
             this.id = r.id;
             this.name = r.name;
@@ -13,10 +13,16 @@
             $location.path('/recipe/' + this.id);
             RecipesFactory.setCurrent(this.id);
         };
+        var recipeslist = (function(){
+            if ($route.current.locals.like == true)
+                return RecipesFactory.getLiked().getCopy();
+            else
+                return RecipesFactory.getRecipes().getCopy();
+        })();
         // recipes - object contains functions related to recipes display.
         var recipes = {
             // list of all recipes
-            all: RecipesFactory.getRecipes().getCopy(),
+            all: recipeslist,
             // orginized list of recipe
             orginzed: (function (list) {
                 var arr = [];
@@ -24,7 +30,7 @@
                     arr.push(new Recipe(r));
                 });
                 return arr;
-            })(RecipesFactory.getRecipes()),
+            })(recipeslist),
             // get list of categories
             categories: RecipesFactory.getCategories().getCopy(),
             // change cuurent category to show
@@ -56,7 +62,7 @@
             recipes.shown = recipes.search;
         });
     }
-    angular.module('controllers').controller('recipesListCtrl', ['$scope', '$location', 'RecipesFactory', ctrl]);
+    angular.module('controllers').controller('recipesListCtrl', ['$scope', '$location', '$route', 'RecipesFactory', ctrl]);
 
     function ctrl2($scope, RecipesFactory, userFactory) {
 

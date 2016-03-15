@@ -115,6 +115,12 @@
                     r = r[0];
                 return r;
             },
+            // get list of liked recipes
+            getLiked: function () {
+                return recipes.filter(function (r) {
+                    return userFactory.isLike(r.id);
+                });
+            },
             getCategory: function (id){
                 return categories.filter(function (c) { return c.id == id })[0];
             },

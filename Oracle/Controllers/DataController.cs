@@ -201,7 +201,7 @@ namespace Oracle.Controllers
         {
             using (recipeEntities re = new recipeEntities())
             {
-                try
+                //try
                 {
                     int id = (Session["user"] as user).id;
                     if (id != null)
@@ -209,7 +209,7 @@ namespace Oracle.Controllers
                         var ex = re.recipe_for_user.Where(r => r.user_id == id && r.recipe_id == recipe).FirstOrDefault();
                         if (ex == null)
                         {
-                            var ru = new recipe_for_user() { recipe_id = recipe, user_id = id };
+                            var ru = new recipe_for_user() { recipe_id = recipe, user_id = id, date = DateTime.Now };
                             re.recipe_for_user.Add(ru);
                             re.SaveChanges();
                             return Json(new { id = ru.id, success = "success" });
@@ -217,9 +217,9 @@ namespace Oracle.Controllers
                         return Json(new { id = ex.id, success = "false", reason = sentences.duplicateVote });
                     }
                 }
-                catch (Exception)
-                {
-                }
+                //catch (Exception)
+                //{
+                //}
                 return Json("fail");
             }
         }

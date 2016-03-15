@@ -6,7 +6,16 @@ app.config(function ($routeProvider, $locationProvider)
     $routeProvider
     .when('/recipes', {
         templateUrl: 'Recipe/allRecipes',
-        controller: 'recipesListCtrl'
+        controller: 'recipesListCtrl',
+        resolve: {
+            like: function () { return false; },
+        },
+    }).when('/liked', {
+        templateUrl: 'Recipe/allRecipes',
+        controller: 'recipesListCtrl',
+        resolve: {
+            like: function () { return true; },
+        },
     }).when('/new', {
         templateUrl: 'Recipe/newRecipe',
         controller: 'newRecipeCtrl'

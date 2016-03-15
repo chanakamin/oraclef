@@ -217,6 +217,7 @@
     <Content Include="App_Data\recipe_log.ldf">
       <DependentUpon>recipe.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\themes\images\Arrow Down.svg" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\jquery.mmenu.all.css" />
     <Content Include="Content\bootstrap\jquery.mmenu.positioning.css" />
@@ -278,6 +279,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\images\tachush13.jpg" />
+    <Content Include="Content\themes\images\tachush18.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

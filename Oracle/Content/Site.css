@@ -59,3 +59,32 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+[ng-cloak] {
+    display:none;
+}
+.recipe {
+    border:1px solid #000;
+    border-radius:20px;
+    margin:10px;
+    background: rgba(0, 0, 0, 0.33);
+    padding:10px;
+    color: #0C2A48;
+}
+.recipe-details {
+    width: 97%;
+    font-size:30px;
+    font-weight:bold;
+}
+.recipe-ingredients {
+    width:40%;
+    /*float:left;*/
+}
+.recipe-equipments {
+    width:40%;
+    float:left;
+}
+.recipe-instructions {
+    width:55%;
+    float:right;
+}

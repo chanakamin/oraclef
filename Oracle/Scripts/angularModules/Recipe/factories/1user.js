@@ -33,12 +33,17 @@
                 return user.user_or_manager;
             },
             addFavorite: function (recipe) {
-                resourcesFactory.addResource('favorite', { recipe: recipe }).then(function (data) {
+                return resourcesFactory.addResource('favorite', { recipe: recipe }).then(function (data) {
+                    data = data.data;
                     if (data.success) {
                         user.favorites.push(data.id)
                     }
+                    return data.success;
                 })
             },
+            isLike: function (recipe_id) {
+                return user.favorites.indexOf(recipe_id) >= 0;
+            }
         };
     }
     angular.module('factoryModule').factory('userFactory',['resourcesFactory','$location',fact]);

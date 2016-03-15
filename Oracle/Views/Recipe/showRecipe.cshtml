@@ -10,6 +10,16 @@
 
         <!--a place for text-->
 <div class="col-xs-7">
+    <p>{{recipe.favorites}}{{::like.msg}}</p>
+    <section ng-if="like.active">
+        <div ng-if="!like.user">
+            {{like.convince}}
+            <button ng-click="like.setLike()">{{::words.like}}</button>
+        </div>
+        <div ng-if="like.user">
+            {{::like.userlike}}
+        </div>
+    </section>
     <div class="recipe-details recipe">
         <div>
             <h2>{{recipe.name}}</h2>
