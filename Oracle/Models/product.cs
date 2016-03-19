@@ -28,12 +28,8 @@ namespace Oracle.Models
         public int nutritional_per { get; set; }
         public int user_id { get; set; }
         public bool approved { get; set; }
-        public int measurements_id_volume { get; set; }
-        public int measurements_id_weight { get; set; }
     
         public virtual measure_type measure_type { get; set; }
-        public virtual measurement measurement { get; set; }
-        public virtual measurement measurement1 { get; set; }
         public virtual ICollection<products_in_nutritional_value> products_in_nutritional_value { get; set; }
         public virtual ICollection<products_in_recipe> products_in_recipe { get; set; }
         public virtual user user { get; set; }

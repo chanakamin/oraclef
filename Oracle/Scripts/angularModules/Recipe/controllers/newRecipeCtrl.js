@@ -1,5 +1,8 @@
-﻿(function () {
-    function ctrl($scope, RecipesFactory, ProductsFactory) {        
+﻿/// <reference path="../../../plugin/own.js" />
+(function () {
+    function ctrl($scope, RecipesFactory, ProductsFactory) {
+        if ($scope.$parent.title !== 'new')
+            $scope.$parent.link('new');
         $scope.text = {
             title: 'new Recipe'
         };
@@ -41,14 +44,22 @@
             r.equipments.push({ equipment: $scope.newEquipment });
             $scope.newEquipment = '';
         }
+
+        $scope.isValid = function(recipe) {
+            return r.products.length > 0 && !!recipe.category.$viewValue ;
+        }
+        function isRecipeP(recipe) {
+            return recipe.$error.required && recipe.$error.required.length == 1 &&  recipe.$error.required[0].$name === 'recipe_product';
+        }
         $scope.SubmitRecipe = function () {            
             if(angular.isObject(event))
                 event.preventDefault();
-            if ($scope.addRecipe.$invalid) {
-                $scope.addRecipe.$setSubmitted();
+            $scope.addRecipe.$setSubmitted();
+            if (($scope.addRecipe.$invalid && !isRecipeP($scope.addRecipe))  || !$scope.isValid($scope.addRecipe)) {
+                //$scope.addRecipe.$setSubmitted();
                 return;
             }
-            if ($scope.addRecipe.$valid) {
+           // if ($scope.addRecipe.$valid) {
                 angular.forEach(r.equipments, function (val, key) {
                     r.equipments[key] = {
                         special_equipment: val.equipment
@@ -56,12 +67,18 @@
                 });
                 r.products_in_recipe = r.products;
                 r.products = null;
+                r.category = r.category1.id;
                 debugger;
                 RecipesFactory.addRecipe(r);
-            }
+         //   }
            // $scope.addRecipe.$setSubmitted();
         }
         $scope.$parent.child = $scope;
-    }
+        $scope.error = {
+            required: sentences.required,
+            select: sentences.select,
+            product_recipe: sentences.product_recipe,
+        }
+       }
     angular.module("controllers").controller("newRecipeCtrl", ['$scope', 'RecipesFactory', 'ProductsFactory', ctrl]);
 })();

@@ -12,6 +12,7 @@ namespace Oracle.Models
         public double weight_in_volume { get; set; }
         public int userId { get; set; }
         public int nutritional_per { get; set; }
+        public double unit_amount { get; set; }
 
         // methods
         public product getEntity()

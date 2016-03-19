@@ -13,9 +13,9 @@ namespace Oracle.Controllers
     {
         //
         // GET: /Login/
-        static recipeEntities re;
+        static recipeEntities1 re;
         static LoginController() {
-            re = new recipeEntities();
+            re = new recipeEntities1();
         }
         public ActionResult Index()
         {
@@ -52,31 +52,36 @@ namespace Oracle.Controllers
 
 
         // Functions return/ does operations upon ajax call
+        [HttpGet]
         public JsonResult user()
         {
-            int status = 0;//, id = -1;
+            returnType ans = new returnType();
             user u = Session["user"] as user;
-            if (u != null)
+            if (u == null)
             {
-                status++;
-               // id = u.id;
+                ans.status = 300;
             }
-            return Json(new { status = status, user = u }, JsonRequestBehavior.AllowGet);
+            else
+            {
+                ans.data = new { user = u };
+            }
+            return Json(ans, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult existUser(string name, string password,string email) {
-            using (recipeEntities re = new recipeEntities())
+            using (recipeEntities1 re = new recipeEntities1())
             {
+                returnType ans = new returnType();
                 bool can = true;
                 user user = null;
-                string reason = "This User doen't exists";
+                ans.reason = sentences.notExistUser; ;
                 var c = re.users.Where(u => u.name == name && u.password == password).Count();
                 if (c != 0)
                 {
                     can = false;
-                    reason = "This user already exist";
                     user = re.users.Where(u => u.name == name && u.password == password).First();
                     Session["user"] = user;
+                    ans.reason = sentences.existUser;
                 }
                 else if (email != null)
                 {
@@ -84,20 +89,20 @@ namespace Oracle.Controllers
                     if (c != 0)
                     {
                         can = false;
-                        reason = "This email address already exists";
+                        ans.reason = sentences.emailExist;
                     }
                 }
                 if (user != null)
                     user = user.getSerialize();
-                var ob = new { can = can, reason = reason, exist = !can, user = user };
-                return Json(ob, JsonRequestBehavior.AllowGet);
+                ans.data = new { can = can, exist = !can, user = user };
+                return Json(ans, JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpPost]
         public JsonResult addUser(user user)
         {
-            var success = true;
+            returnType ans = new returnType();
             if (TryUpdateModel(user))
             {
                 re.users.Add(user);
@@ -106,6 +111,7 @@ namespace Oracle.Controllers
                 {
                     //Membership.CreateUser(user.name, user.password, user.email);
                     re.SaveChanges();
+                    ans.data = new { id = user.id, user = user.getSerialize() };
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -124,9 +130,9 @@ namespace Oracle.Controllers
             }
             else
             {
-                success = false;
+                ans.status = 350;
             }
-            return Json(new { success = success,id = user.id, user = user.getSerialize() },JsonRequestBehavior.AllowGet);
+            return Json(ans, JsonRequestBehavior.AllowGet);
         }
         public ActionResult allRecipes() {
             return View();
@@ -139,31 +145,36 @@ namespace Oracle.Controllers
 
         public ActionResult register(user user)
         {
+            returnType ans = new returnType();
             if (TryUpdateModel(user))
             {
-               // Membership.ValidateUser(user.name, user.password);
+                // Membership.ValidateUser(user.name, user.password);
                 Session["user"] = user;
             }
             else
+            {
                 Session["user"] = null;
-            return Json("success", JsonRequestBehavior.AllowGet);
+                ans.status = 500;
+            }
+            return Json(ans, JsonRequestBehavior.AllowGet);
         }
         public JsonResult guest() {
             Session["user"] = "guest";
-            return Json("success", JsonRequestBehavior.AllowGet);
+            return Json(new returnType(), JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult unregister(int id)
         {
-            string res = "success";
+            returnType ans = new returnType();
             object obj = Session["user"];
             user u;
             if (obj is user && (u = (user)obj).id == id)
-            {                
+            {
                 Session["user"] = null;
             }
             else
-                res = "fail";
-            return Json(res, JsonRequestBehavior.AllowGet);
+                ans.status = 500;
+            return Json(ans, JsonRequestBehavior.AllowGet);
         }
     }
 }

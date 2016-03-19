@@ -42,6 +42,16 @@ function round(num, p) {
     num = Math.round(num);
     return num / m;
 }
+
+var sentences = {
+    required: 'This field is required',
+    emailstyle: 'Enter a valid email address',
+    userExists: 'This user already exists',
+    confirm: 'Password does not match',
+    passwordL: 'Password too long',
+    select: 'An option must be selected',
+    product_recipe: 'A recipe must contain products',
+}
 //Object.method('getCopy', function () {
 //    var a = {};
 //    if (typeof this === 'object') {

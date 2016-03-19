@@ -1,9 +1,32 @@
 ﻿
 
-body #recipes {
-   
+body#manager {
+    background:url('themes/images/tachush18.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+    color:white;
+    height:100%;   
 }
 
+#manager h1{
+    color:#ff6a00;
+    font-weight:300;
+}
+
+#manager h2{
+    font-size:2em;
+    font-weight:300;
+}
+
+
+#manager #welcomeUser{
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+}
+
+/*Login*/
 body#login { 
             background:url('themes/images/tachush13.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
@@ -11,7 +34,7 @@ body#login {
             -o-background-size: cover;
             background-size: cover;
 }
-/*Login*/
+
 
 
 #login h1{
@@ -26,6 +49,45 @@ body#login {
     color:white;
     height:100%;
     height:100vh;
+}
+
+/*enter menu*/
+#welcomeMenu input{
+    background-color:rgba(0,0,0,0);
+    border-color:rgba(0,0,0,0);
+    margin-bottom:15px;
+    height:3em; 
+}
+
+#welcomeMenu button {
+    background-color:#ff6a00;
+    color:black;
+    height:2em;
+    margin-right:10px;
+}
+
+#enterMenu h1{
+    font-size:1.5em;
+    color:#ff6a00;
+    font-weight:300;
+}
+
+/*recipes*/
+#searchBox button{
+    background-color:none;
+    color:#ff6a00;
+    height:50px;
+    font-size:2em;
+    font-weight:300;
+}
+
+searchRecipe{
+    height:100%;
+    background-color:rgba(0,0,0,0.6);
+}
+
+#enterMenu{
+    margin-left:25px;
 }
 
 #colSubject .btn{
@@ -83,13 +145,9 @@ body#login {
     padding:5px, 10px;
 }
 
-form.ng-submitted input.ng-invalid,  input.ng-invalid.ng-dirty {
+[ng-form].ng-submitted input.ng-invalid ,form.ng-submitted input.ng-invalid,  input.ng-invalid.ng-dirty {
             border: solid 1px red;
             outline: none;
         }
 
-        /*input.ng-invalid.ng-dirty {
-            border: solid 1px red;
-            outline: none;
-        }*/
-
+      

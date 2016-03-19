@@ -11,6 +11,8 @@
             if (angular.isObject(event))
                 event.preventDefault();
             $location.path('/recipe/' + this.id);
+            $scope.$parent.part = 'show';
+            $scope.$parent.title = 'Show Recipe',
             RecipesFactory.setCurrent(this.id);
         };
         var recipeslist = (function(){

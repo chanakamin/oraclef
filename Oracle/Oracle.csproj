@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -135,10 +137,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\application\lists.cs" />
     <Compile Include="Models\application\NutritonalValue_for_product.cs" />
     <Compile Include="Models\application\Produ.cs" />
     <Compile Include="Models\application\Product.cs" />
     <Compile Include="Models\application\Recipe.cs" />
+    <Compile Include="Models\application\returnType.cs" />
     <Compile Include="Models\category.cs">
       <DependentUpon>Recipe.tt</DependentUpon>
     </Compile>
@@ -169,6 +173,7 @@
     <Compile Include="Models\partialModelClasses\product_in_nutritional_value.cs" />
     <Compile Include="Models\partialModelClasses\recipe.cs" />
     <Compile Include="Models\partialModelClasses\user.cs" />
+    <Compile Include="Models\application\sentences.cs" />
     <Compile Include="Models\product.cs">
       <DependentUpon>Recipe.tt</DependentUpon>
     </Compile>
@@ -199,7 +204,6 @@
     <Compile Include="Models\recipe_for_user.cs">
       <DependentUpon>Recipe.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sentences.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Recipe.tt</DependentUpon>
     </Compile>
@@ -417,7 +421,6 @@
     <Content Include="Views\Shared\Welcome.cshtml" />
     <Content Include="Views\Recipe\favorite.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -427,6 +430,7 @@
     <Content Include="Scripts\angularModules\.idea\_name" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
@@ -445,9 +449,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>49331</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49408/</IISUrl>
+          <IISUrl>http://localhost:49488/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

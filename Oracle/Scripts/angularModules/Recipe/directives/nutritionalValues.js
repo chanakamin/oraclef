@@ -4,6 +4,7 @@
             restrict: 'E',
             scope: {
                 products: "=",
+                portions: '=',
             },
             templateUrl: 'Recipe/nutritionalValues',
             controller: 'nutritionalRecipeCtrl',

@@ -14,9 +14,10 @@
     var dircalc = function () {
         var ddo = {
             restrict: 'E',
-            scope: {
-                products: '=',
-            },
+            //scope: {
+            //    config: '=',
+            //    convert: '&',
+            //},
             templateUrl: 'Recipe/calculator',
             controller: 'calculatorCtrl',
         }

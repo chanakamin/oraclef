@@ -10,11 +10,11 @@ namespace Oracle.Controllers
 {
     public class RecipeController : Controller
     {
-        static recipeEntities recipes;
+        static recipeEntities1 recipes;
 
         static RecipeController()
         {            
-            recipes = new recipeEntities();
+            recipes = new recipeEntities1();
         }        
 
         public ActionResult Index(bool partial = false)

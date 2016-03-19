@@ -3,11 +3,13 @@
     function fact(resourcesFactory, DetailsFactory, userFactory, $rootScope, $location) {
         var products = [];
         // create new product object
-        function Product(productName,description,weight_in_volume,measure){
+        function Product(productName, description, weight_in_volume, measure, unit_amount){
             this.name = productName;
             this.description;
             this.weight_in_volume = weight_in_volume;
             this.nutritional_per = measure;
+            this.amount_weight_in_volume = weight_in_volume;
+            this.unit_amount = unit_amount;
         }    
         Product.prototype.addProduct = function (nutritionals) {
             var config = {
@@ -16,10 +18,17 @@
             };
             resourcesFactory.addResource('addProduct', config)
                     .then(function (data) {
-                        var p = angular.fromJson(data).data.p;
-                        this.id = p.id;
-                        products.push(product);
-                        console.log("add product succeed");
+                        if (data.status == 200) {
+                            var p = angular.fromJson(data).data.product;
+                            this.id = p.id;
+                            products.push(p);
+                            console.log("add product succeed");
+                            return p;
+                        }
+                        else {
+                            console.log('add product failed: ' + data.reason);
+                            return data.reason;
+                        }
                     });
         }
 
@@ -29,9 +38,13 @@
             };
             resourcesFactory.updateResource('product', config)
                 .then(function (data) {
-                    angular.forEach(data, function (val, key) {
-                        this[val] = key;
-                    });
+                    if (data.status == 200) {
+                        angular.forEach(data.data, function (val, key) {
+                            this[val] = key;
+                        });
+                        return true;
+                    }
+                    return false;
                 });
         }
         function orginizedProduct(p) {
@@ -67,11 +80,17 @@
             };
             resourcesFactory.addResource('addProduct', config)
                     .then(function (data) {
-                        debugger;
-                        var p = angular.fromJson(data).data.p;
-                        product.id = p.id;
-                        products.push(product);
-                        console.log("add product succeed");
+                        if (data.status == 200) {
+                            var p = angular.fromJson(data).data.p;
+                            product.id = p.id;
+                            products.push(product);
+                            console.log("add product succeed");
+                            return p;
+                        }
+                        else {
+                            console.log('add product fail: ' + data.reason);
+                            return data.reason;
+                        }
                     });
             //});
             //.error(function (e) {
@@ -83,7 +102,7 @@
                 .success(function (data) {
                     console.log("in init from db");
                     console.log(data);
-                    orginizedList(data);
+                    orginizedList(data.data);
                 })
                  .error(function (er) {
                      console.log(er);
@@ -131,7 +150,7 @@
                 var userId = userFactory.getUser().id;
                 product = orginizedProduct(product);
                 if (userId > 0) {                    
-                    product.userId = userId;
+                    product.userId = product.user_id = userId;
                     product.addProduct(nutritionalsValues);
                    // addProductToDb(product, nutritionalsValues);
                 }
@@ -139,12 +158,15 @@
             update: function (product) {
                 return resourcesFactory.updateResource('product', { p: product })
                 .then(function (data) {
-                    pr = products.filter(function (p) {
-                        return p.id == data.id;
-                    })[0];
-                    pr = product;
-                    //$location.path('/recipe/' + re.id);
-                    return pr;
+                    if (data.status == 200) {
+                        pr = products.filter(function (p) {
+                            return p.id == data.data.id;
+                        })[0];
+                        pr = product;
+                        //$location.path('/recipe/' + re.id);
+                        return pr;
+                    }
+                    return false;
                 });
             },
             notApproved: function () {

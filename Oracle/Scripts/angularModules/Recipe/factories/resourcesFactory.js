@@ -9,16 +9,31 @@
         return {
             initResources: function () {
                 return $http.get("Data/getLists").then(function (data) {
-                    resources = data.data;
-                    console.log(resources);
+                    data = data.data;
+                    if (data.status == 200) {
+                        resources = data.data;
+                        console.log(resources);
+                    }
+                    else
+                        console.log('an error had occoured, no data: '+ data.reason);
                     return;
                 });
             },
             initResource: function (action, resource) {
                 return $http.get("Data/" + action).then(function (data) {
                     console.log(data);
-                    resources[resource] = data;
-                    return data;
+                    data = data.data;
+                    if (data.status == 200) {
+                        resources[resource] = data.data;
+                        return data;
+                    }
+                    else {
+                        return {
+                            status: false,
+                            reason: data.reason,
+                        }
+                    }
+                    
                 });
             },
             getResource: function (resource) {
@@ -27,7 +42,7 @@
             addResource: function (action, config) {
                 return $http.post("Data/" + action, config)
                     .then(function (data) {
-                        return data;
+                        return data.data;
                     });
             },
             updateResource: function (action, data) {

@@ -68,6 +68,8 @@
             var measureBase = dtf.getMeasurement(productRecipe.measurements_id);
             var ratio = measureBase.amount / measurement.amount;
             productRecipe.amount *= ratio;
+            productRecipe.measurement = measurement;
+            productRecipe.measurements_id = measurement.id;
         }
 
         // return apprpiate measurement to product recipe.
@@ -80,17 +82,17 @@
             });
             if (i === -1)
                 return false;
-            if (i === l)
+            if (i === l-1)
                 return product_recipe;
             measureToMeasuret(prt, list[i + 1]);
             if (i > 0)
                 measureToMeasuret(prd, list[i - 1]);
             // if product is weight / volume
             if (measuretype.measure_type.measure_type1 !== words.tools) {
-                if (Math.floor(prt.amount) > Math.floor(product_recipe.amount)) {
+                if (Math.floor(prt.amount * 10) >= 1 ) {
                     return prt;
                 }
-                else if (Math.floor(prd.amount) < Math.floor(product_recipe.amount)) {
+                else if (Math.floor(product_recipe.amount * 10) < 1) {
                     return prd;
                 }
             }
@@ -165,6 +167,7 @@
                 var amount = requestAmount(product_recipe.amount, measure, reqMeasure, product);
                 if (typeof amount === 'number') {
                     product_recipe.measurements_id = reqMeasure.id;
+                    product_recipe.measurement = reqMeasure;
                     product_recipe.amount = amount;
                 }
             }

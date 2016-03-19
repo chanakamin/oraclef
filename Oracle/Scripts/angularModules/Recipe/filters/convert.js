@@ -1,4 +1,5 @@
-﻿(function () {
+﻿/// <reference path="../../../plugin/own.js" />
+(function () {
     // this function filter an array of products - recipe to requested display
     function filter(cf,constf) {
 
@@ -63,5 +64,114 @@
         return calc;
     };
 
-    angular.module('filters').filter('convert', ['convertFactory','constantFactory',filter]);
+    angular.module('filters').filter('convert', ['convertFactory', 'constantFactory', filter]);
+
+
+
+    function filtServing() {
+        function calc(input, amount) {
+            return amount;
+        }
+        return calc;
+    };
+    angular.module('filters').filter('serving', [filtServing]);
+
+    function filtAmounts(DetailsFactory, convertFactory, constantFactory) {
+        function calc(input, config) {
+            var output = new Array(), out;
+            angular.forEach(input, function (p) {
+                out = create(p);
+                
+                
+                if (config.measurement_type.id > 0)
+                {
+                    if (out.measurement.measure_type_id !== config.measurement_type.id) {
+                        if (out.measurements_id !== constantFactory.measurement_id.tools || config.convert_units) {
+                            convertFactory.convertMeasure(out, config.measurement_type);
+                            out = convertFactory.closerMeasure(out);
+                        }
+                    }
+
+                }
+
+                out.product_name = out.product.name;
+                if (out.amount > 1) {
+                    if (out.measurement.name == 'unit') {
+                        out.product_name = out.product_name.pluralize();
+                    } else {
+                        out.measurement_name = out.measurement.name.pluralize();                       
+                    }
+                }
+                else {
+                    if (out.measurement.name == 'unit') {
+                        out.product_name = out.product_name.singularize().toString();
+                    } else {
+                        out.measurement_name = out.measurement.name.singularize().toString();
+                    }
+                }
+                if (out.measurement.name == 'unit')
+                    out.measurement_name = '';
+                out.amount = round(out.amount * config.multiply, 2);
+                output.push(out);
+            });
+
+            return output;
+        }
+        calc.$stateful = true;
+        return calc;
+    }
+    /*amount: 0.3
+id: 13
+measurement: Object
+alias: "cup"
+amount: 200
+id: 5
+measure_type: "tools"
+measure_type_id: 3
+measurement_id: 2
+name: "cup"
+__proto__: Object
+measurements_id: 5
+product: Product
+amount_weight_in_volume: 1.23
+approved: true
+description: "special for baking,cooking &"
+id: 7
+measure_type: Object
+name: "date's spreed"
+nutritionalValue: Array[7]
+nutritional_per: undefined
+products_in_nutritional_value: Array[7]
+products_in_recipe: Array[0]
+unit_amount: 100
+user_id: 5
+weight_in_volume: undefined
+__proto__: Product
+product_id: 7
+recipe: null
+recipe_id: 12*/
+    angular.module('filters').filter('convertf', ['DetailsFactory', 'convertFactory','constantFactory', filtAmounts]);
+
+    function filtmeasurep() {
+        function calc(input, amount) {
+            if (input == 'unit')
+                return '';
+            if (amount <= 1)
+                return input;
+            return input.pluralize();
+        }
+        return calc;
+    }
+    angular.module('filters').filter('measurep', [filtmeasurep]);
+
+    function filtIngp() {
+        function calc(input, measure, amount) {
+            if(measure !== 'unit' || amount <= 1)
+                return input;
+            return input.pluralize();
+        }
+        return calc;
+    }
+    angular.module('filters').filter('ingrediantp', [filtIngp]);
+    
 })();

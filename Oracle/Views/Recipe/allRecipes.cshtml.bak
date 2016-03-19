@@ -1,0 +1,35 @@
+﻿@model Oracle.Models.recipe
+        <!--a place for tips-->
+        <div class="col-xs-5" >
+            <div class="well">
+                <search-recipe search-result="recipes.search"></search-recipe>
+            </div>
+        </div>
+
+        <!--a place for text-->
+<div class="col-xs-3" >   
+    <h5>Show recipes from Category:</h5>
+    @*<select ng-model="recipes.cat" ng-change="recipes.change()"
+        ng-options="cat.name for cat in recipes.categories track by cat.id"></select>*@
+    <ul>
+        <li ng-repeat="cat in recipes.categories track by cat.id">
+            <button type="button" ng-click="recipes.changeC(cat)">{{cat.name}}</button>
+        </li>
+    </ul>
+ </div>
+        <!--this is a disapearing menu (how to do? toggle?--check.)-->
+<div class="col-xs-4" >
+    <ul>
+        <li ng-repeat="group in recipes.shown">
+            <h6>{{group.name}}</h6>
+            <a href="#" ng-repeat="recipe in group.list track by recipe.id" ng-click="recipe.show()" >
+                <label>{{recipe.name}}</label>
+                <p>{{recipe.description}}</p>
+            </a>
+        </li>
+    </ul>     
+</div>
+
+
+
+ 

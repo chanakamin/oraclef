@@ -13,12 +13,11 @@ namespace Oracle.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class recipeEntities : DbContext
+    public partial class recipeEntities1 : DbContext
     {
-        public recipeEntities()
-            : base("name=recipeEntities")
+        public recipeEntities1()
+            : base("name=recipeEntities1")
         {
-            Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

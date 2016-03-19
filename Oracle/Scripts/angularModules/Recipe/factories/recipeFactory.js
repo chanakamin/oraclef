@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../plugin/own.js" />
 (function () {
     /* Fuctory to save all functions of recipe */
-    angular.module('factoryModule').factory('RecipesFactory', function ($http, $location, resourcesFactory, DetailsFactory, ProductsFactory, userFactory, convertFactory) {
+    angular.module('factoryModule').factory('RecipesFactory', function ( $location, resourcesFactory, DetailsFactory, ProductsFactory, userFactory, convertFactory) {
         var current = 0;
         var recipes = [],
             categories = [];
@@ -56,9 +56,11 @@
         var initRecipesFromDb = function () {
             resourcesFactory.initResource('getRecipes','recipes')
                     .success(function (data) {
-                        console.log('in init recipes');
-                        console.log(data);
-                        orginizedList(data);
+                        if (data.status == 200) {
+                            console.log('in init recipes');
+                            console.log(data.data);
+                            orginizedList(data.data);
+                        }
                     })
                     .error(function (e) {
                         console.log('init recipes failed. ' + e);
@@ -74,10 +76,17 @@
             recipe.equipments = recipe.products_in_recipe = null;
             resourcesFactory.addResource('addRecipe', config)
                 .then(function (data) {
-                    var r = data.data.recipe;
-                    recipe.id = r.id;
-                    recipes.push(r);
-                    $location.path('/recipe/' + r.id);
+                    if (data.status == 200) {
+                        var r = data.data.recipe;
+                        recipe.id = r.id;
+                        recipes.push(r);
+                        $location.path('/recipe/' + r.id);
+                        return r;
+                    }
+                    else {
+                        console.log('add recipe failed. ' + data.reason);
+                        return data.reason;
+                    }
                 });
         }
 
@@ -162,12 +171,15 @@
             update: function (recipe) {
                 return resourcesFactory.updateResource('recipe', { r: recipe })
                  .then(function (data) {
-                     re = recipes.filter(function (r) {
-                         return r.id == data.id;
-                     })[0];
-                     re = recipe;
-                     $location.path('/recipe/' + re.id);
-                     return re;
+                     if (data.status == 200) {
+                         re = recipes.filter(function (r) {
+                             return r.id == data.data.id;
+                         })[0];
+                         re = recipe;
+                         $location.path('/recipe/' + re.id);
+                         return re;
+                     }
+                     return data.reason;
                  });
             },
             approve: function (id, ap) {

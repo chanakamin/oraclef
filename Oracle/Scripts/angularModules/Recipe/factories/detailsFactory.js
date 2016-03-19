@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../plugin/own.js" />
 (function () {
-    var factory = angular.module("factoryModule").factory("DetailsFactory", function($http, resourcesFactory){
+    var factory = angular.module("factoryModule").factory("DetailsFactory", function(resourcesFactory){
         // arrays of details
         var nutritionals = [],
             measurements = [],
@@ -81,9 +81,7 @@
             defaultConvertObject: function () {
                return {
                     multiply: 1,
-                    measurement_type: measureTypes.filter(function (m) {
-                        return m.measure_type1 === 'tools';
-                    })[0],
+                    measurement_type: { id: 0, measure_type1: "remain" },
                     convert_units: 0,
                 };
             },

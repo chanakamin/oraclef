@@ -7,6 +7,23 @@
                 zposition: "front"
             }
         });
+
+        $("#productMenu").mmenu({
+            extensions: ["theme-dark", "border-full", "multiline", "pagedim-white"],
+            offCanvas: {
+                position: "right",
+                zposition: "front"
+            }
+        });
+        $("#calculatorMenu").mmenu({
+            extensions: ["theme-dark", "border-full", "multiline", "pagedim-white"],
+            offCanvas: {
+                position: "right",
+                zposition: "front"
+            }
+        });
+
+
         var n = document.getElementById("notChrome");
         if (n !== null)
             n.style.display = "none";

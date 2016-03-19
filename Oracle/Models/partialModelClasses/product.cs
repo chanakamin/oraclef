@@ -7,16 +7,16 @@ namespace Oracle.Models
 {
     public partial class product
     {
-        static private recipeEntities re;
+        static private recipeEntities1 re;
         static product()
         {
-            re = new recipeEntities();
+            re = new recipeEntities1();
         }
 
         //=========== create new product from class Product from application classes
         public static product create(Product product)
         {
-            using(var res = new recipeEntities()){
+            using(var res = new recipeEntities1()){
                 product p = new product();
                 List<int> managers = res.users.Where(u => u.user_or_manager == true)
                 .Select(u => u.id).ToList();
@@ -26,6 +26,7 @@ namespace Oracle.Models
               p.approved = managers.Any(id => id == p.user_id);
               p.amount_weight_in_volume = product.weight_in_volume;
               p.nutritional_per = product.nutritional_per;
+              p.unit_amount = product.unit_amount;
               return p;
             }            
         }

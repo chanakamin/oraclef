@@ -21,7 +21,12 @@
                     user.password = u.password;
                     user.email = u.email;
                     resourcesFactory.getData('favorite').then(function (data) {
-                        user.favorites = data;
+                        if (data.status == 200) {
+                            user.favorites = data.data
+                        } else {
+                            console.log('an error occured on favorites: ' + data.reason);
+                        };
+                        
                     })
                 }
             },
@@ -35,14 +40,15 @@
             addFavorite: function (recipe) {
                 return resourcesFactory.addResource('favorite', { recipe: recipe }).then(function (data) {
                     data = data.data;
-                    if (data.success) {
-                        user.favorites.push(data.id)
+                    if (data.status == 200) {
+                        user.favorites.push(data.data.id)
+                        return true;
                     }
-                    return data.success;
+                    return data.reason;
                 })
             },
             isLike: function (recipe_id) {
-                return user.favorites.indexOf(recipe_id) >= 0;
+                return user.favorites.id.indexOf(recipe_id) >= 0;
             }
         };
     }

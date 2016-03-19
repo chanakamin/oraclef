@@ -2,10 +2,10 @@
         <div class="col-xs-2" >
             <div class="well">
                <p> 
-                  Nutritional values
+                  Nutritional values per portions
                </p>
             </div>
-            <nutritional-values products="recipe.products"></nutritional-values>
+            <nutritional-values products="recipe.products" portions="recipe.portions"></nutritional-values>
         </div>
 
         <!--a place for text-->
@@ -28,7 +28,7 @@
             <h4>{{recipe.description}}</h4>
         </div>
         <div>
-            <h6>Portions: {{recipe.portions}}</h6>
+            <h6>Portions: {{recipe.portions | serving : config.portions}}</h6>
         </div>
         <div>
             <h6>Preparation: {{recipe.preparation}}</h6>
@@ -40,10 +40,11 @@
     </div>
     <div class="recipe-ingredients recipe">
         <h5>Ingredients</h5>
-        <div ng-repeat="p in recipe.products track by p.id">
-            <label>{{p.amount}}</label>
-            <label>{{p.measurement.name}}</label>
-            <label>{{p.product.name}}</label>
+        @*<div ng-repeat="p in products | amountf: config track by p.id ">*@
+        <div ng-repeat="p in products track by p.id ">
+            <label>{{p.amount }}</label>
+            <label>{{p.measurement_name }}</label>
+            <label>{{p.product_name }}</label>
         </div>
     </div>
      <div class="recipe-equipments recipe">
@@ -58,10 +59,47 @@
         </p>
     </div>
 </div>
-<!--this is a disapearing menu (how to do? toggle?--check.)-->
-<div class="col-xs-3" >
-    <calculator products="recipe.products"></calculator>
+<calculator config="config" convert="convert"></calculator>
+
+<nav id="calculatorMenu" class="col-xs-12 col-sm-5">
+    <ul>
+        <li>
+            <div ng-controller="calculatorCtrl">
+    <ng-form name="convertions">
+        <section>
+            <h2>{{words.measure_type}}</h2>
+            <p ng-repeat="measure in measurement_type track by measure.id">
+                <input type="radio"  ng-model ="config.measurement_type" ng-value="measure" ng-click="convert()"/>
+                <label>{{words.types[measure.measure_type1]}}</label>
+            </p> 
+            <input type="checkbox" ng-model="config.convert_units" /><label>{{words.units}}</label>           
+        </section>
+        <hr />
+        <section>
+            <h2>{{ words.amount }}</h2>
+            <label>{{portions.portions}}</label>
+            <input ng-repeat="oper in portions.operations" value="{{oper}}" ng-click="portions.calculate(oper);  convert()" ng-change="convert()" ng-model="oper" type="button" />
+            <input type="number" min="1" max ="10" step="0.25" ng-model="portions.operand" ng-click="convert()"/>
+            <label>{{portions.shouldbe}}</label><br />
+            <button type="button" ng-click="portions.reset()">{{ words.reset }}</button>
+        </section>
+        <hr />
+        @*<input type="button" ng-click="convert()" value="{{words.ok}}" />*@
+    </ng-form>    
 </div>
 
+        </li>
+    </ul>
+</nav>
+
+<script>
+    $("#calculatorMenu").mmenu({
+        extensions: ["theme-dark", "border-full", "multiline", "pagedim-white"],
+        offCanvas: {
+            position: "right",
+            zposition: "front"
+        }
+    });
+</script>
 
  

@@ -15,7 +15,7 @@
                 data: { name: this.name, password: this.password, email: this.email },
                 url: "Login/existUser",
             }).then(function (data) {
-                return data;
+                return data.data;
             })
         }
         // add user to db.
@@ -32,8 +32,12 @@
                 },
                 url: "Login/addUser",
             }).then(function (data) {
-                this.id = data.data.id;
-                return true;
+                var data = data.data;
+                if (data.status === 200) {
+                    this.id = data.data.id;
+                    return true;
+                }
+                return data.reason;
             });            
         };
         // login
@@ -48,10 +52,14 @@
                         RememberMe: false
                     }
                 },
-                url: "Login/login",
+                url: "Login/register",
             }).then(function (data) {
-                user = this;
-                return true;
+                data = data.data;
+                if (data.status === 200) {
+                    user = this;
+                    return true;
+                }
+                return data.reason;
             });
         }
         // logout
@@ -77,7 +85,7 @@
                         return user.add();
                      }
                     else {
-                        return data.data.reason;
+                        return data.reason;
                     }
                 });
             },
@@ -88,10 +96,10 @@
                 u = new User(name, password);
                 return u.verify().then(function (data) {
                     if (data.data.exist) {
-                        data = data.data;
-                        u.email = data.user.email;
-                        u.user_or_manager = data.user.user_or_manager;
-                        u.id = data.user.id;
+                        var user = data.data.user;
+                        u.email = user.email;
+                        u.user_or_manager = user.user_or_manager;
+                        u.id = user.id;
                         u.register();
                         if (!u.user_or_manager)
                             return true;
@@ -100,7 +108,7 @@
                         }
                     }
                     else {
-                        return data.data.reason;
+                        return data.reason;
                     }
                 });
             },

@@ -1,19 +1,24 @@
-﻿(function () {
+﻿/// <reference path="../../../plugin/own.js" />
+(function () {
     function calc($scope, convertFilter,DetailsFactory) {
         var measurements_type = $scope.measurement_type = DetailsFactory.measureTypes().filter(function (m) {
             return m.id <= 3;
         });
+        var original = $scope.products;
+        //$scope.convert = function () {
+        //    $scope.products = convertFilter($scope.products, $scope.config);
+        //}
+        $scope.reset = function () {
+            $scope.products = original;
+        }
 
-        measurements_type.unshift({ id: 0, measure_type1: "remain" });
+        measurements_type.unshift($scope.config.measurement_type);
         
         // object contains default options for
-        $scope.config = DetailsFactory.defaultConvertObject();
+       // $scope.config = DetailsFactory.defaultConvertObject();
 
-        $scope.convert = function () {
-            $scope.products = convertFilter($scope.products, $scope.config);
-        }
         $scope.portions = portions = {
-            portions: $scope.$parent.recipe.portions,
+            portions: $scope.recipe.portions,
             operations: ['+', '-', '/', '*'],
             calculate: function (oper) {
                 var ans = portions.shouldbe, operand = portions.operand;
@@ -39,6 +44,7 @@
                     ans = 1;
                 portions.shouldbe = ans;
                 $scope.config.multiply = portions.shouldbe / portions.portions;
+                $scope.config.portions = portions.shouldbe;
             },
             operand: 1,
             shouldbe: 1,
@@ -63,5 +69,5 @@
             reset: 'Reset',
         }
     }
-    angular.module('controllers').controller('calculatorCtrl', ['$scope', 'convertFilter','DetailsFactory', calc]);
+    angular.module('controllers').controller('calculatorCtrl', ['$scope', 'convertfFilter','DetailsFactory', calc]);
 })();

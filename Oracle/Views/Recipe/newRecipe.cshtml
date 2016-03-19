@@ -1,42 +1,48 @@
 ﻿@model Oracle.Models.recipe
 <div id="newRecipe">
     <div class="row" id="main" >
-        <div id="tips" class="hidden-xs hidden-sm hidden-md col-lg-1">
+        <div id="tips" class="hidden-xs hidden-sm hidden-md hidden-lg">
             <well>
                 <h2>Fill in the information the best you can.</h2>
                 <p>The more information you enter the better chance you have for your recipe to be accepted.</p>
             </well>
         </div>
-        <div id="newRecipeForm" class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
+        <div id="newRecipeForm" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form class="form-group" name="addRecipe" id="addRecipe" ng-submit="SubmitRecipe()">
                 <div id="title" class="row">
                     <div class="row">
                         <div class="input-group-lg col-xs-12">
                             <label class="sr-only" for="Recipe Name">Recipe Name</label>
-                            <input id="Recipe Name" aria-labelledby="Recipe Name" class="form-control" ng-model="recipe.name" placeholder="Recipe Name" required="required" type="text" />
+                            <input id="Recipe Name" name="name" aria-labelledby="Recipe Name" class="form-control" ng-model="recipe.name" placeholder="Recipe Name" required="required" type="text" />
+                            <span ng-if="addRecipe.name.$error.required && addRecipe.$submitted">{{::error.required}}</span>
                         </div>
                         <div class="input-group-sm col-xs-12">
                             <label class="sr-only" for="Description">Description</label>
-                            <input id="Description" aria-labelledby="Description" class="form-control" ng-model="recipe.description" placeholder="{{ texts.recipe.description }}" type="text" />
+                            <input id="Description" aria-labelledby="Description" class="form-control" ng-model="recipe.description" placeholder="{{ texts.recipe.description }}" type="text" name="description" required="required" />
+                            <span ng-if="addRecipe.description.$error.required && addRecipe.$submitted">{{::error.required}}</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
                             <div class="input-group-sm">
                                 <label class="sr-only" for="Preperation Time">Preperation Time</label>
-                                <input id="Preperation Time" aria-labelledby="Preperation Time" class="form-control" ng-model="recipe.preparation" placeholder="{{ texts.recipe.preparation }}" type="text" />
+                                <input id="Preperation Time" aria-labelledby="Preperation Time" class="form-control" ng-model="recipe.preparation" placeholder="{{ texts.recipe.preparation }}" type="text"  name="preparation" required="required"/>
+                                <span ng-if="addRecipe.preparation.$error.required && addRecipe.$submitted">{{::error.required}}</span>
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
                             <div class="input-group-sm ">
                                 <label class="sr-only" for="Servings">Servings</label>
-                                <input id="Servings" aria-labelledby="Servings" class="form-control" ng-model="recipe.portions" placeholder="{{ texts.recipe.portions }}" type="number" />
+                                <input id="Servings" aria-labelledby="Servings" class="form-control" ng-model="recipe.portions" placeholder="{{ texts.recipe.portions }}" type="number" required="required" name="serving" />
+                                <span ng-if="addRecipe.serving.$error.required && addRecipe.$submitted">{{::error.required}}</span>
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
                             <div class="input-group-sm">
-                                <label class="sr-only" for="Preperation Time">Category</label>
-                                <select id="Category" class="form-control" ng-model="recipe.category1" default-option="Select Category" ng-options="category as category.name for category in categories track by category.id" aria-labelledby="Category" />
+                                <label class="sr-only" for="Category">Category</label>
+                                <select id="Category" name="category" class="form-control" ng-model="recipe.category1" default-option="Select Category" ng-options="category as category.name for category in categories track by category.id" aria-labelledby="Category" />
+                                                            <span ng-if="!addRecipe.category.$viewValue.id && addRecipe.$submitted">{{::error.select}}</span>
+
                             </div>
                         </div>
                     </div>
@@ -51,12 +57,15 @@
                             <div class="row" id="addIngredient">
                                 <addproduct-recipe recipe-products="recipe.products"></addproduct-recipe>
                              </div>
+                            <span ng-if="recipe.products.length < 1 && addRecipe.$submitted">{{::error.product_recipe}}</span>
+
                         </div>
                     <div id="instructions" class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
                         <div class="input-group col-xs-12">
                             <label class="sr-only" for="Instructions">Instructions</label>
                             <!--chana can you make the number of rows = to #recipeBody's px /5  in angular?-->
-                            <textarea id="Instructions" aria-labelledby="Instructions" class="form-control" ng-model="recipe.instructions" placeholder="{{ texts.recipe.instructions }}" rows="20"></textarea>                                                        
+                            <textarea id="Instructions" aria-labelledby="Instructions" class="form-control" ng-model="recipe.instructions" placeholder="{{ texts.recipe.instructions }}" rows="20" required="required" name="instructions"></textarea> 
+                            <span ng-if="addRecipe.instructions.$error.required && addRecipe.$submitted">{{::error.required}}</span>                                                       
                         </div>
                         <div class="input-group col-xs-12">
                             <div class="input-group-sm col-xs-12" ng-repeat="special in recipe.equipments | filter:nonEmpty ">
@@ -76,17 +85,6 @@
                 </div>
             </form>
         </div>
-
-<nav id="welcomeMenu" class="col-xs-12 col-sm-5">
-    <ul>
-        <li>
-            <div new-product="" ng-show="showProduct" show="showProduct"></div>
-        </li>
-    </ul>
-</nav>
-        <@*div class="col-xs-3 Pullout">
-            <div new-product="" ng-show="showProduct" show="showProduct"></div>
-        </div>
     </div>
-</div>     *@  
-
+</div>
+      

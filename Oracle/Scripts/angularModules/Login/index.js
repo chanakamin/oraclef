@@ -1,4 +1,5 @@
-﻿(function () {
+﻿/// <reference path="../../plugin/own.js" />
+(function () {
     function ctrl($scope, $locatoin,$timeout,$http, userFactory) {
         function direct(part) {
             $scope.manager = false;
@@ -81,30 +82,54 @@
         $scope.sign = {};
         $scope.user = userFactory.getUser();
         $scope.signup = function () {
+            if ($scope.newUser.$invalid)
+                return;
             user = $scope.user;
+            if (user.password !== user.conpassword) {
+                $scope.newUser.confirmpassword.$error.match = true;
+                $scope.newUser.$setValidity('match', false, 'loginCtrl');
+                return;
+            }
             userFactory.signin(user.name, user.password, user.email)
                 .then(function (success) {
                     if (success == true)
                         direct('Recipe');
                     else {
-
-                        $scope.sign.message = [success];
+                        $scope.newUser.errersrv = true;
+                        $scope.message = success;
                     }
                 });
         };
+        $scope.signup.confirm = function () {
+            var user = user = $scope.user;
+            if (user.password !== user.conpassword) {
+                $scope.newUser.confirmpassword.$error.match = true;
+                $scope.newUser.confirmpassword.$setValidity('match', false, 'loginCtrl');
+                return;
+            }
+            else {
+                $scope.newUser.confirmpassword.$error.match = false;
+                $scope.newUser.confirmpassword.$setValidity('match', true, 'loginCtrl');
+                return;
+            }
+        }
         $scope.Login = function () {
+            if ($scope.login.$invalid)
+                return;
             user = $scope.user;
             userFactory.login(user.name, user.password)
-                .then(function (success) {
-                    if (success == true)
+                .then(function (data) {
+                    debugger;
+                    if (data == true)
                         direct('Recipe');
                     else {
-                        if (success == 'manager') {
+                        if (data == 'manager') {
                             $scope.message = messages.getMessage('manager');
-                            $scope.error = false;
-                        } else {
+                            //$scope.error = false;
                             $scope.manager = true;
-                            $scope.sign.message = [success];
+                        } else {
+                            $scope.login.errersrv = true;
+                            $scope.message = data;
                         }
                     }
             });
@@ -125,6 +150,13 @@
             $scope.apply();
         })
         parts.restart();
+
+        $scope.error = {
+            email: sentences.emailstyle,
+            required: sentences.required,
+            minlength: sentences.passwordL,
+            confirm: sentences.confirm,
+        };
     }
     angular.module('LoginApp').controller('loginCtrl', ['$scope','$location','$timeout','$http','userFactory',ctrl]);
 })();

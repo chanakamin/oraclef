@@ -19,9 +19,9 @@ app.config(function( $locationProvider,$routeProvider)
 app.run(function ($location, $rootScope, $http, $rootScope) {
     $http.get('Login/user').then(function (data) {
         var d = data.data; 
-        if (d.status == 1)
+        if (d.status == 200)
         {
-            if (d.user.user_or_manager) {
+            if (d.data.user.user_or_manager) {
                 $rootScope.$broadcast('manager_login');
             }
             else {

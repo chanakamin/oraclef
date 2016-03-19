@@ -7,17 +7,17 @@ namespace Oracle.Models
 {
     public partial class recipe
     {
-        static private recipeEntities re;
+        static private recipeEntities1 re;
         static recipe() 
         {
-            re = new recipeEntities();
+            re = new recipeEntities1();
         }
         // list of special equipment
         public List<string> equipments
         {
             get
             {
-                using (recipeEntities re = new recipeEntities())
+                using (recipeEntities1 re = new recipeEntities1())
                 {
                     return re.equipment_in_recipe.Where(eq => eq.recipe_id == this.id).Select(eq => eq.special_equipment).ToList();
                 }
@@ -28,7 +28,7 @@ namespace Oracle.Models
         {
             get
             {
-                using (recipeEntities re = new recipeEntities())
+                using (recipeEntities1 re = new recipeEntities1())
                 {
                     return re.products_in_recipe.Where(pr => pr.recipe_id == this.id).ToList().Select(pr => pr.getSerialize()).ToList();
                 }
@@ -36,7 +36,7 @@ namespace Oracle.Models
         }
 
         public int favorites { get {
-            using (re = new recipeEntities())
+            using (re = new recipeEntities1())
             {
                 return re.recipe_for_user.Where(ru => ru.recipe_id == this.id).ToList().Count();
             }
@@ -44,15 +44,18 @@ namespace Oracle.Models
         // set if recipe approved
         public bool isApproved() 
         {
-            List<int> managers = re.users.Where(u => u.user_or_manager == true)
-                .Select(u=>u.id).ToList();
-            this.approved = managers.Any(id =>id == this.user_id);
-            return this.approved;
+            using (re = new recipeEntities1())
+            {
+                List<int> managers = re.users.Where(u => u.user_or_manager == true)
+                    .Select(u => u.id).ToList();
+                this.approved = managers.Any(id => id == this.user_id);
+                return this.approved;
+            }
         }
         // return recipe for serialize
         public recipe getSerialize()
         {
-            using (recipeEntities re = new recipeEntities())
+            using (recipeEntities1 re = new recipeEntities1())
             {
                 recipe r = new recipe()
                 {

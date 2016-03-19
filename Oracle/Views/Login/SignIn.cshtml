@@ -1,26 +1,54 @@
-﻿<div class="col-xs-12">
-    <form name="login" ng-model="login" ng-submit="Login()">
-        <div class="row" id="messages">
-            <ul>
-                <li ng-repeat="msg in sign.messages">{{msg}}</li>
-            </ul>
-        </div>
+﻿<div class="col-xs-12" id="enterMenu">
+    <form class="form-group" name="login" ng-model="login" ng-submit="Login()" novalidate="novalidate">
         <div class="row">
-            <h3>{{signin.operation}} </h3>
-            <p>{{signin.message}}</p>
+         <div class="col-xs-12" ng-if="login.errersrv">
+            <p>{{message}}</p>
         </div>
-        <div class="row">
-    `       <input type="text" ng-model="user.name" name="name" placeholder="Name" required="required"/>
+        <div class="col-xs-12" id="messages">
+                <label class="sr-only" for="message">Enter Your name and password to sign in.</label>               
+            </div>
+            <div class="col-xs-12">
+                <label class="sr-only" for="msgSignIn">Sign in.</label>
+                <h1>{{signin.operation}} </h1>
+            </div>
+
+            <div class="input-group-sm col-xs-12">
+                <label class="sr-only" for="name">name</label>
+                `       <input type="text" ng-model="user.name" name="name" placeholder="Name" required="required"/>
+            <span ng-if="login.name.$error.required && login.$submitted">{{::error.required}}</span>
+            </div>
+
+        <div class="input-group-sm col-xs-12">
+                <label class="sr-only" for="password">password</label>
+                <input type="password" name="password" ng-model="user.password" placeholder="password" required="required" />
+            <span ng-if="login.password.$error.required && login.$submitted">{{::error.required}}</span>
+            </div>
+
+    
+    	<div class="row">
+                <div class="col-xs-4">
+                    <label class="sr-only" for="login">log in</label>
+                    <button id="login" class="btn-default" type="submit"><span class="glyphicon glyphicon-log-in"></span> {{words.login}}</button>
+                </div>
+                <div class="col-xs-4">
+                    <label class="sr-only" for="cancel">cancel</label>
+                    <a id="cancel" class="btn-default" href="#mm-1"><span class="glyphicon glyphicon-log-in"></span> {{words.cancel}}</a>
+                </div>
+                <div class="col-xs-4">
+                    <label class="sr-only" for="signup">sign up</label>
+                    <a id="signup" class="btn-default" href="#mm-2"><span class="glyphicon glyphicon-ok"></span> {{words.signin}}</a>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <input type="password" name="password" ng-model="user.password" placeholder="password" required="required" />
-        </div>
-    	<button type="submit">{{words.login}}</button>
-    	<a href="#mm-1">{{words.cancel}}</a>
-    	<a href="#mm-2">{{words.signin}}</a>
     </form>
-    	<div ng-if="manager">
-        	<button type="button" ng-click="direct('Recipe')">{{words.user}}</button>
-        	<button type="button" ng-click="direct('Manager')">{{words.manager}}</button>
+    	<div ng-if="manager" class="row">
+            <div class="col-xs-12">
+                <label class="sr-only" for="user">user</label>
+                <button id="user" class="btn-default" type="button" ng-click="direct('Recipe')"><span class="glyphicon glyphicon-user"></span> {{words.user}}</button>
+            </div>
+            <div class="col-xs-12">
+                <label class="sr-only" for="manager">Manager</label>
+                <button id="manager" class="btn-default" type="button" ng-click="direct('Manager')"><span class="glyphicon glyphicon-king" {{words.manager}}</button>
+            </div>
     	</div>
     </div>

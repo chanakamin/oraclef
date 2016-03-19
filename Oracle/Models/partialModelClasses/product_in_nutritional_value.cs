@@ -7,10 +7,10 @@ namespace Oracle.Models
 {
     public partial class products_in_nutritional_value
     {
-        static recipeEntities re;
+        static recipeEntities1 re;
         static products_in_nutritional_value()
         {
-            re = new recipeEntities();
+            re = new recipeEntities1();
         }        
        
         //========= Constructors

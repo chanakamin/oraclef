@@ -1,21 +1,30 @@
 ﻿@model Oracle.Models.product
 
-<form name="addProduct" id="addProduct" ng-submit="SubmitProduct()" class="form-group">
-    <div class="input-group-lg">
+<form name="addProduct" id="addProduct" ng-submit="SubmitProduct()" class="form-group" novalidate="novalidate">
+    <div class="input-group-sm">
         <label for="Product Name" class="sr-only">Product Name</label>
-        <input id="ProductName" type="text" ng-model="product.name" class="form-control" placeholder="Product Name" aria-labelledby="Product Name" />
+        <input id="ProductName" name="name" type="text" ng-model="product.name" class="form-control" placeholder="Product Name" aria-labelledby="Product Name" required="required"/>
+        <span ng-if="addProduct.name.$error.required && addProduct.$submitted">{{::error.required}}</span>
     </div>
     <div class="input-group-sm">
         <label for="Description" class="sr-only">Description</label>
-        <input  id="productDescription" ng-model="product.description"  type="text" class="form-control" placeholder="Description" aria-labelledby="Description" />
+        <input  id="productDescription" ng-model="product.description"  type="text" name="description" class="form-control" placeholder="Description" aria-labelledby="Description" required="required" />
+        <span ng-if="addProduct.description.$error.required && addProduct.$submitted">{{::error.required}}</span>
     </div>
      <div class="input-group-sm">
         <label for="mgWeight" class="sr-only">Milligram Weight</label>
-        <input id="mgWeight" type="number" class="form-control" placeholder="Milligram Weight" step="0.01" ng-model="product.weight_in_volume" aria-labelledby="Milligram Weight" />
+        <input id="mgWeight" type="number" class="form-control" placeholder="Milligram Weight" step="0.01" ng-model="product.weight_in_volume" aria-labelledby="Milligram Weight" required="required" name="mgWeight"/>
+         <span ng-if="addProduct.mgWeight.$error.required && addProduct.$submitted">{{::error.required}}</span>
     </div>
+    <div class="input-group-sm">
+        <label for="unit_ampount" class="sr-only">Unit Weight</label>
+        <input id="unit_amount" name="unit_amount" type="number" class="form-control" placeholder="unit weight" step="0.01" ng-model="product.unit_amount" aria-labelledby="Unit Weight" />
+        <span ng-if="addProduct.unit_amount.$error.required && addProduct.$submitted">{{::error.required}}</span>
+        </div>
     <div class="input-group-sm col-xs-10">
         <label for="mgWeight" class="sr-only"> Measurement type</label>
-        <select class="form-control" ng-model="product.nutritional_per" default-option="select measurement type" ng-options="type.id as type.measure_type1 for type in measureTypes" ></select>
+        <select name="mtype" ng-required="reuired" required="required" class="form-control" ng-model="product.nutritional_per" default-option="select measurement type" ng-options="type.id as type.measure_type1 for type in measureTypes"  ></select>
+        <span ng-if="addProduct.mtype.$viewValue < 1 && addProduct.$submitted">{{::error.required}}</span>
     </div>
     <div class="input-group-sm">
         <input type="submit" value="Create" class="form-controll" />

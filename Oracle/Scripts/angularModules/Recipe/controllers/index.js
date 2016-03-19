@@ -1,6 +1,6 @@
 ﻿(function () {
     // controller for index page
-    function ctrl($scope, $location, $rootScope, resourcesFactory,uf) {
+    function ctrl($scope, $location, $rootScope, uf) {
         $scope.part = $scope.title = 'welcome';
         $scope.$on('init', function () {
             $scope.user = uf.getUser();
@@ -36,6 +36,6 @@
             like: 'Like it',
         };
     }
-    angular.module("controllers").controller("indexCtrl", ['$scope', '$location', '$rootScope', 'resourcesFactory','userFactory', ctrl]);
+    angular.module("controllers").controller("indexCtrl", ['$scope', '$location', '$rootScope', 'userFactory', ctrl]);
 })();
 

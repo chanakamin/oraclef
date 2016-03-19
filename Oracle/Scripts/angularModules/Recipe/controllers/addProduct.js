@@ -1,4 +1,5 @@
-﻿(function () {
+﻿/// <reference path="../../../plugin/own.js" />
+(function () {
     function ctrl($scope, ProductsFactory, DetailsFactory) {
         // text will be shown in the view
         $scope.text = {
@@ -42,6 +43,9 @@
 
         // onSubmit function
         $scope.SubmitProduct = function () {
+            if ($scope.addProduct.$invalid == true || $scope.addProduct.mtype.$viewValue < 1) {
+                return;
+            }
             var nutritionalsValues = [];
             angular.forEach(p.mustNutrition, function (value) {
                 nutritionalsValues.push({
@@ -52,8 +56,13 @@
             var pr = p;
             pr.mustNutrition = null;
             $scope.show = false;
-            ProductsFactory.addProduct(pr, nutritionalsValues);
+            ProductsFactory.addProduct(pr, nutritionalsValues).then(function () {
+                $scope.addProduct.$submitted = false;
+            });
             $scope.product = p = createProduct();
+        };
+        $scope.error = {
+            required: sentences.required,
         };
     }
     // Controller for add product
